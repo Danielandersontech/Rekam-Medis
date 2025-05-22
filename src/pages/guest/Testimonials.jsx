@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+
 import testimonials from "../../assets/testimonials.json";
 export default function Testimonials() {
   return (

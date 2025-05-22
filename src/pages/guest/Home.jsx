@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import About from "./About";
-import Testimonials from "./testimonials";
+import Testimonials from "./Testimonials";
 import Products from "./Products";
 
 export default function GuestHome() {
