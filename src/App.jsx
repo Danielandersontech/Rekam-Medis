@@ -5,7 +5,7 @@ import Loading from "./components/Loading";
 import GuestHome from "./pages/guest/Home";
 import GuestLayout from "./layouts/GuestLayout";
 import About from "./pages/guest/About";
-import Testimonials from "./pages/guest/testimonials";
+import Testimonials from "./pages/guest/Testimonials";
 import StockCheck from "./pages/guest/StockCheck";
 import Products from "./pages/guest/Products";
 const Dashboard = React.lazy(() => import("./pages/Dashboard"));
