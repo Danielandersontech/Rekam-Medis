@@ -1,0 +1,212 @@
+[
+    {
+      "customer_id": 1,
+      "customer_name": "John Doe",
+      "email": "john.doe@example.com",
+      "phone": "1234567890",
+      "loyalty": "Gold"
+    },
+    {
+      "customer_id": 2,
+      "customer_name": "Jane Smith",
+      "email": "jane.smith@example.com",
+      "phone": "2345678901",
+      "loyalty": "Silver"
+    },
+    {
+      "customer_id": 3,
+      "customer_name": "Robert Johnson",
+      "email": "robert.j@example.com",
+      "phone": "3456789012",
+      "loyalty": "Bronze"
+    },
+    {
+      "customer_id": 4,
+      "customer_name": "Emily Davis",
+      "email": "emily.d@example.com",
+      "phone": "4567890123",
+      "loyalty": "Gold"
+    },
+    {
+      "customer_id": 5,
+      "customer_name": "Michael Brown",
+      "email": "michael.b@example.com",
+      "phone": "5678901234",
+      "loyalty": "Silver"
+    },
+    {
+      "customer_id": 6,
+      "customer_name": "Sarah Wilson",
+      "email": "sarah.w@example.com",
+      "phone": "6789012345",
+      "loyalty": "Gold"
+    },
+    {
+      "customer_id": 7,
+      "customer_name": "David Taylor",
+      "email": "david.t@example.com",
+      "phone": "7890123456",
+      "loyalty": "Bronze"
+    },
+    {
+      "customer_id": 8,
+      "customer_name": "Jessica Anderson",
+      "email": "jessica.a@example.com",
+      "phone": "8901234567",
+      "loyalty": "Silver"
+    },
+    {
+      "customer_id": 9,
+      "customer_name": "Thomas Martinez",
+      "email": "thomas.m@example.com",
+      "phone": "9012345678",
+      "loyalty": "Gold"
+    },
+    {
+      "customer_id": 10,
+      "customer_name": "Lisa Robinson",
+      "email": "lisa.r@example.com",
+      "phone": "0123456789",
+      "loyalty": "Bronze"
+    },
+    {
+      "customer_id": 11,
+      "customer_name": "Daniel Clark",
+      "email": "daniel.c@example.com",
+      "phone": "1122334455",
+      "loyalty": "Silver"
+    },
+    {
+      "customer_id": 12,
+      "customer_name": "Amanda Rodriguez",
+      "email": "amanda.r@example.com",
+      "phone": "2233445566",
+      "loyalty": "Gold"
+    },
+    {
+      "customer_id": 13,
+      "customer_name": "James Lewis",
+      "email": "james.l@example.com",
+      "phone": "3344556677",
+      "loyalty": "Bronze"
+    },
+    {
+      "customer_id": 14,
+      "customer_name": "Jennifer Lee",
+      "email": "jennifer.l@example.com",
+      "phone": "4455667788",
+      "loyalty": "Silver"
+    },
+    {
+      "customer_id": 15,
+      "customer_name": "Matthew Walker",
+      "email": "matthew.w@example.com",
+      "phone": "5566778899",
+      "loyalty": "Gold"
+    },
+    {
+      "customer_id": 16,
+      "customer_name": "Laura Hall",
+      "email": "laura.h@example.com",
+      "phone": "6677889900",
+      "loyalty": "Bronze"
+    },
+    {
+      "customer_id": 17,
+      "customer_name": "Kevin Allen",
+      "email": "kevin.a@example.com",
+      "phone": "7788990011",
+      "loyalty": "Silver"
+    },
+    {
+      "customer_id": 18,
+      "customer_name": "Nicole Young",
+      "email": "nicole.y@example.com",
+      "phone": "8899001122",
+      "loyalty": "Gold"
+    },
+    {
+      "customer_id": 19,
+      "customer_name": "Andrew Hernandez",
+      "email": "andrew.h@example.com",
+      "phone": "9900112233",
+      "loyalty": "Bronze"
+    },
+    {
+      "customer_id": 20,
+      "customer_name": "Michelle King",
+      "email": "michelle.k@example.com",
+      "phone": "0011223344",
+      "loyalty": "Silver"
+    },
+    {
+      "customer_id": 21,
+      "customer_name": "Ryan Wright",
+      "email": "ryan.w@example.com",
+      "phone": "1029384756",
+      "loyalty": "Gold"
+    },
+    {
+      "customer_id": 22,
+      "customer_name": "Stephanie Lopez",
+      "email": "stephanie.l@example.com",
+      "phone": "2130495867",
+      "loyalty": "Bronze"
+    },
+    {
+      "customer_id": 23,
+      "customer_name": "Jason Hill",
+      "email": "jason.h@example.com",
+      "phone": "3241506978",
+      "loyalty": "Silver"
+    },
+    {
+      "customer_id": 24,
+      "customer_name": "Rebecca Scott",
+      "email": "rebecca.s@example.com",
+      "phone": "4352617089",
+      "loyalty": "Gold"
+    },
+    {
+      "customer_id": 25,
+      "customer_name": "Brandon Green",
+      "email": "brandon.g@example.com",
+      "phone": "5463728190",
+      "loyalty": "Bronze"
+    },
+    {
+      "customer_id": 26,
+      "customer_name": "Melissa Adams",
+      "email": "melissa.a@example.com",
+      "phone": "6574839201",
+      "loyalty": "Silver"
+    },
+    {
+      "customer_id": 27,
+      "customer_name": "Gary Nelson",
+      "email": "gary.n@example.com",
+      "phone": "7685940312",
+      "loyalty": "Gold"
+    },
+    {
+      "customer_id": 28,
+      "customer_name": "Angela Carter",
+      "email": "angela.c@example.com",
+      "phone": "8796051423",
+      "loyalty": "Bronze"
+    },
+    {
+      "customer_id": 29,
+      "customer_name": "Justin Mitchell",
+      "email": "justin.m@example.com",
+      "phone": "9807162534",
+      "loyalty": "Silver"
+    },
+    {
+      "customer_id": 30,
+      "customer_name": "Kimberly Perez",
+      "email": "kimberly.p@example.com",
+      "phone": "0918273645",
+      "loyalty": "Gold"
+    }
+  ]
