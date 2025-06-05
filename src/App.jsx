@@ -7,7 +7,7 @@ import GuestLayout from "./layouts/GuestLayout";
 import About from "./pages/guest/About";
 import Testimonials from "./pages/guest/Testimonials";
 import StockCheck from "./pages/guest/StockCheck";
-import Products from "./pages/guest/Products";
+import Products from "./pages/Products";
 const Dashboard = React.lazy(() => import("./pages/Dashboard"));
 const Orders = React.lazy(() => import("./pages/Orders"));
 const Customers = React.lazy(() => import("./pages/Customers"));
@@ -22,6 +22,7 @@ const Error401 = React.lazy(() => import("./pages/Error401"));
 const Error403 = React.lazy(() => import("./pages/Error403"));
 const Error404 = React.lazy(() => import("./pages/Error404"));
 const Users = React.lazy(() => import("./pages/User"));
+const ProductDetail = React.lazy(() => import("./pages/ProductDetail"))
 
 function App() {
   return (
@@ -39,7 +40,9 @@ function App() {
           <Route path="/orders" element={<Orders />} />
           <Route path="/customers" element={<Customers />} />
           <Route path="/user" element={<Users />} />
+          <Route path="products" element={<Products/>} />
           <Route path="*" element={<Error404 />} />
+          <Route path="/products/:id" element={<ProductDetail />} />
         </Route>
         <Route element={<GuestLayout/>}>
           <Route path="/guest" element={<GuestHome/>} />

@@ -1,4 +1,5 @@
-import { FaUserCircle } from "react-icons/fa"; 
+import { MdFastfood } from "react-icons/md"; 
+import { FaUserCircle } from "react-icons/fa";
 import { BiCommentError } from "react-icons/bi";
 import { AiTwotoneCustomerService } from "react-icons/ai";
 import { VscListFlat } from "react-icons/vsc";
@@ -38,6 +39,12 @@ export default function ListMenu() {
           <NavLink id="menu-4" to="/user" className={menuClass}>
             <FaUserCircle className="mr-4 text-xl" />
             Users
+          </NavLink>
+        </li>
+        <li>
+          <NavLink id="menu-4" to="/products" className={menuClass}>
+            <MdFastfood className="mr-4 text-xl" />
+            Products
           </NavLink>
         </li>
       </ul>
