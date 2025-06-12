@@ -1,4 +1,5 @@
-import { AiFillDelete } from "react-icons/ai";
+import { BiEditAlt } from "react-icons/bi";
+import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import { notesAPI } from "../services/notesAPI";
 import AlertBox from "../components/AlertBox";
@@ -17,9 +18,10 @@ export default function Notes() {
     status: "",
   });
 
+  const [isEdit, setIsEdit] = useState(false);
+  const [editId, setEditId] = useState(null);
   const [notes, setNotes] = useState([]);
 
-  // Handle perubahan nilai input form
   const handleChange = (evt) => {
     const { name, value } = evt.target;
     setDataForm({
@@ -30,20 +32,22 @@ export default function Notes() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setError("");
+    setSuccess("");
 
     try {
-      setLoading(true);
-      setError("");
-      setSuccess("");
-
-      await notesAPI.createNote(dataForm);
-
-      setSuccess("Catatan berhasil ditambahkan!");
+      if (isEdit) {
+        await notesAPI.updateNote(editId, dataForm);
+        setSuccess("Catatan berhasil diperbarui!");
+      } else {
+        await notesAPI.createNote(dataForm);
+        setSuccess("Catatan berhasil ditambahkan!");
+      }
 
       setDataForm({ title: "", content: "", status: "" });
-
-      setTimeout(() => setSuccess(""), 3000);
-
+      setIsEdit(false);
+      setEditId(null);
       loadNotes();
     } catch (err) {
       setError(`Terjadi kesalahan: ${err.message}`);
@@ -52,7 +56,6 @@ export default function Notes() {
     }
   };
 
-  // Handle untuk aksi hapus data
   const handleDelete = async (id) => {
     const konfirmasi = confirm("Yakin ingin menghapus catatan ini?");
     if (!konfirmasi) return;
@@ -63,14 +66,22 @@ export default function Notes() {
       setSuccess("");
 
       await notesAPI.deleteNote(id);
-
-      // Refresh data
       loadNotes();
     } catch (err) {
       setError(`Terjadi kesalahan: ${err.message}`);
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleEdit = (note) => {
+    setDataForm({
+      title: note.title,
+      content: note.content,
+      status: note.status || "",
+    });
+    setIsEdit(true);
+    setEditId(note.id);
   };
 
   const loadNotes = async () => {
@@ -81,7 +92,6 @@ export default function Notes() {
       setNotes(data);
     } catch (err) {
       setError("Gagal memuat catatan");
-      console.error(err);
     } finally {
       setLoading(false);
     }
@@ -103,7 +113,7 @@ export default function Notes() {
       {/* Form Card */}
       <div className="bg-white rounded-2xl shadow-lg p-6">
         <h3 className="text-lg font-semibold text-gray-800 mb-4">
-          Tambah Catatan Baru
+          {isEdit ? "Edit Catatan" : "Tambah Catatan Baru"}
         </h3>
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -115,9 +125,7 @@ export default function Notes() {
             onChange={handleChange}
             required
             disabled={loading}
-            className="w-full p-3 bg-gray-50 rounded-2xl border border-gray-200 focus:outline-none
-              focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all
-              duration-200"
+            className="w-full p-3 bg-gray-50 rounded-2xl border border-gray-200"
           />
 
           <textarea
@@ -128,21 +136,38 @@ export default function Notes() {
             required
             rows="2"
             disabled={loading}
-            className="w-full p-3 bg-gray-50 rounded-2xl border border-gray-200 focus:outline-none
-              focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all
-              duration-200 resize-none"
+            className="w-full p-3 bg-gray-50 rounded-2xl border border-gray-200 resize-none"
           />
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold
-              rounded-2xl focus:outline-none focus:ring-2 focus:ring-emerald-500
-              focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed
-              transition-all duration-200 shadow-lg"
-          >
-            {loading ? "Mohon Tunggu..." : "Tambah Data"}
-          </button>
+          <div className="flex gap-2">
+            <button
+              type="submit"
+              disabled={loading}
+              className="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold
+                rounded-2xl disabled:opacity-50 transition-all shadow-lg"
+            >
+              {loading
+                ? "Mohon Tunggu..."
+                : isEdit
+                ? "Simpan Perubahan"
+                : "Tambah Data"}
+            </button>
+
+            {isEdit && (
+              <button
+                type="button"
+                onClick={() => {
+                  setIsEdit(false);
+                  setDataForm({ title: "", content: "", status: "" });
+                  setEditId(null);
+                }}
+                className="px-6 py-3 bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold
+                  rounded-2xl transition-all shadow"
+              >
+                Batal Edit
+              </button>
+            )}
+          </div>
         </form>
       </div>
 
@@ -167,30 +192,25 @@ export default function Notes() {
             </div>
 
             <GenericTable
-              columns={["#", "Judul", "Isi Catatan"]}
+              columns={["#", "Judul", "Isi Catatan", "Aksi"]}
               data={notes}
               renderRow={(note, index) => (
                 <>
-                  <td className="px-6 py-4 font-medium text-gray-700">
-                    {index + 1}.
+                  <td className="px-6 py-4">{index + 1}</td>
+                  <td className="px-6 py-4 text-emerald-600 font-semibold">
+                    {note.title}
                   </td>
-                  <td className="px-6 py-4">
-                    <div className="font-semibold text-emerald-600">
-                      {note.title}
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 max-w-xs">
-                    <div className="truncate text-gray-600">{note.content}</div>
-                  </td>
-                  <td className="px-6 py-4 max-w-xs">
-                    <div className="truncate text-gray-600">
-                      <button
-                        onClick={() => handleDelete(note.id)}
-                        disabled={loading}
-                      >
-                        <AiFillDelete className="text-red-400 text-2xl hover:text-red-600 transition-colors" />
-                      </button>
-                    </div>
+                  <td className="px-6 py-4 text-gray-600">{note.content}</td>
+                  <td className="px-6 py-4 flex gap-2">
+                    <button onClick={() => handleEdit(note)} disabled={loading}>
+                      <BiEditAlt className="text-blue-500 text-2xl hover:text-blue-700" />
+                    </button>
+                    <button
+                      onClick={() => handleDelete(note.id)}
+                      disabled={loading}
+                    >
+                      <AiFillDelete className="text-red-400 text-2xl hover:text-red-600" />
+                    </button>
                   </td>
                 </>
               )}
