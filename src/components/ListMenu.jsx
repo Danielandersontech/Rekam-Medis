@@ -1,4 +1,5 @@
-import { MdFastfood } from "react-icons/md"; 
+import { CgNotes } from "react-icons/cg"; 
+import { MdFastfood } from "react-icons/md";
 import { FaUserCircle } from "react-icons/fa";
 import { BiCommentError } from "react-icons/bi";
 import { AiTwotoneCustomerService } from "react-icons/ai";
@@ -45,6 +46,12 @@ export default function ListMenu() {
           <NavLink id="menu-4" to="/products" className={menuClass}>
             <MdFastfood className="mr-4 text-xl" />
             Products
+          </NavLink>
+        </li>
+        <li>
+          <NavLink id="menu-5" to="/notes" className={menuClass}>
+            <CgNotes className="mr-4 text-xl" />
+            Notes
           </NavLink>
         </li>
       </ul>
