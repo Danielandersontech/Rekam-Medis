@@ -1,5 +1,5 @@
 {
-  "name": "daniel-app",
+  "name": "rekam-medis",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,13 +10,24 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/icons-material": "^7.1.1",
+    "@mui/lab": "^7.0.0-beta.13",
+    "@mui/material": "^7.1.1",
     "@tailwindcss/vite": "^4.0.14",
-    "axios": "^1.9.0",
+    "axios": "^1.10.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "daisyui": "^5.0.43",
+    "lucide-react": "^0.517.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icon": "^1.0.0",
     "react-icons": "^5.5.0",
-    "react-router-dom": "^7.5.1",
+    "react-responsive-carousel": "^3.2.23",
+    "react-router-dom": "^7.6.2",
+    "tailwind-variants": "^1.0.0",
     "tailwindcss": "^4.0.14"
   },
   "devDependencies": {
