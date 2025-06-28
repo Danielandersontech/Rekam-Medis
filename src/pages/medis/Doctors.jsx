@@ -89,10 +89,10 @@ export default function Doctors() {
       <section className="bg-blue-900 text-white py-16">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl lg:text-5xl font-bold mb-4">
-            Our Expert Doctors
+            Dokter Ahli Kami
           </h1>
           <p className="text-xl text-blue-200 max-w-2xl mx-auto">
-            Meet our team of highly qualified and experienced medical professionals dedicated to your health
+           Temui tim kami yang terdiri dari para profesional medis yang berkualifikasi tinggi dan berpengalaman yang berdedikasi untuk kesehatan Anda
           </p>
         </div>
       </section>
@@ -102,10 +102,10 @@ export default function Doctors() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              TRUSTED CARE
+              PERAWATAN TERPERCAYA
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Our doctors are committed to providing exceptional medical care with compassion and expertise
+             Dokter kami berkomitmen untuk memberikan perawatan medis yang luar biasa dengan penuh kasih sayang dan keahlian
             </p>
           </div>
           
@@ -140,12 +140,12 @@ export default function Doctors() {
                     </div>
                     <div className="flex items-center space-x-1 text-gray-500">
                       <Users size={14} />
-                      <span>{doctor.patients}+ patients</span>
+                      <span>{doctor.patients}+ pasien</span>
                     </div>
                   </div>
                   
                   <div className="mb-4">
-                    <p className="text-sm text-gray-600 mb-2">Available: {doctor.availability}</p>
+                    <p className="text-sm text-gray-600 mb-2">Tersedia: {doctor.availability}</p>
                     <div className="flex flex-wrap gap-2">
                       {doctor.achievements.slice(0, 2).map((achievement, index) => (
                         <span key={index} className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">
@@ -160,7 +160,7 @@ export default function Doctors() {
                       to="/appointment"
                       className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition text-center text-sm font-medium"
                     >
-                      Book Appointment
+                      Janji Temu Buku
                     </Link>
                     <button className="bg-gray-100 text-gray-600 py-2 px-4 rounded-lg hover:bg-gray-200 transition">
                       <Mail size={16} />
@@ -177,10 +177,10 @@ export default function Doctors() {
       <section className="py-16 bg-blue-50">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            Ready to Meet Your Doctor?
+            Siap Bertemu dengan Dokter Anda?
           </h2>
           <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            Schedule an appointment with one of our expert physicians today and take the first step towards better health.
+            Jadwalkan janji temu dengan salah satu dokter ahli kami hari ini dan ambil langkah pertama menuju kesehatan yang lebih baik.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
@@ -188,14 +188,14 @@ export default function Doctors() {
               className="flex items-center justify-center space-x-2 bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition font-medium"
             >
               <Calendar size={18} />
-              <span>Book Appointment</span>
+              <span>Janji Temu Buku</span>
             </Link>
             <Link
               to="/contact"
               className="flex items-center justify-center space-x-2 border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-lg hover:bg-blue-600 hover:text-white transition font-medium"
             >
               <Phone size={18} />
-              <span>Contact Us</span>
+              <span>Hubungi Kami</span>
             </Link>
           </div>
         </div>
@@ -208,22 +208,22 @@ export default function Doctors() {
             <div>
               <Award className="w-12 h-12 text-blue-300 mx-auto mb-4" />
               <h3 className="text-3xl font-bold mb-2">50+</h3>
-              <p className="text-blue-200">Expert Doctors</p>
+              <p className="text-blue-200">Dokter Ahli</p>
             </div>
             <div>
               <Users className="w-12 h-12 text-blue-300 mx-auto mb-4" />
               <h3 className="text-3xl font-bold mb-2">10,000+</h3>
-              <p className="text-blue-200">Happy Patients</p>
+              <p className="text-blue-200">Pasien yang bahagia</p>
             </div>
             <div>
               <Clock className="w-12 h-12 text-blue-300 mx-auto mb-4" />
               <h3 className="text-3xl font-bold mb-2">15+</h3>
-              <p className="text-blue-200">Years Experience</p>
+              <p className="text-blue-200">Pengalaman bertahun-tahun</p>
             </div>
             <div>
               <Star className="w-12 h-12 text-blue-300 mx-auto mb-4" />
               <h3 className="text-3xl font-bold mb-2">4.8</h3>
-              <p className="text-blue-200">Average Rating</p>
+              <p className="text-blue-200">Peringkat Rata-rata</p>
             </div>
           </div>
         </div>

@@ -38,10 +38,10 @@ export default function Contact() {
       <section className="bg-blue-900 text-white py-16">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl lg:text-5xl font-bold mb-4">
-            Get in Touch
+            Hubungi kami
           </h1>
           <p className="text-xl text-blue-200">
-            We're here to help and answer any questions you might have
+            Kami siap membantu dan menjawab pertanyaan apa pun yang mungkin Anda miliki
           </p>
         </div>
       </section>
@@ -73,34 +73,34 @@ export default function Contact() {
               <div className="bg-white p-8 rounded-lg shadow-lg">
                 <h2 className="text-3xl font-bold text-gray-900 mb-6 flex items-center">
                   <MessageSquare className="mr-3 text-blue-600" />
-                  Send us a Message
+                  Kirimkan pesan kepada kami
                 </h2>
                 <p className="text-gray-600 mb-8">
-                  Have a question or need to schedule an appointment? Fill out the form below and we'll get back to you as soon as possible.
+                  Punya pertanyaan atau ingin membuat janji temu? Isi formulir di bawah ini dan kami akan menghubungi Anda sesegera mungkin.
                 </p>
                 
                 <form className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
-                        First Name *
+                        Nama Depan *
                       </label>
                       <input 
                         type="text" 
                         required
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="Enter your first name"
+                        placeholder="Masukkan nama depan Anda"
                       />
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Last Name *
+                        Nama Belakang *
                       </label>
                       <input 
                         type="text" 
                         required
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="Enter your last name"
+                        placeholder="Masukkan nama belakang Anda"
                       />
                     </div>
                   </div>
@@ -108,53 +108,53 @@ export default function Contact() {
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Email Address *
+                        Alamat Email *
                       </label>
                       <input 
                         type="email" 
                         required
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="Enter your email"
+                        placeholder="masukkan alamat email"
                       />
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Phone Number
+                        Nomor Telepon
                       </label>
                       <input 
                         type="tel" 
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="Enter your phone number"
+                        placeholder="Masukkan nomor telepon Anda"
                       />
                     </div>
                   </div>
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Subject *
+                      Subjek *
                     </label>
                     <select 
                       required
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     >
-                      <option value="">Select a subject</option>
-                      <option value="appointment">Appointment Inquiry</option>
-                      <option value="medical">Medical Question</option>
-                      <option value="billing">Billing Inquiry</option>
-                      <option value="feedback">Feedback</option>
-                      <option value="other">Other</option>
+                      <option value="">Pilih subjek</option>
+                      <option value="appointment">Pertanyaan Janji Temu</option>
+                      <option value="medical">Pertanyaan Medis</option>
+                      <option value="billing">Pertanyaan Penagihan</option>
+                      <option value="feedback">Umpan Balik</option>
+                      <option value="other">Lainnya</option>
                     </select>
                   </div>
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Message *
+                      Pesan *
                     </label>
                     <textarea 
                       rows={6}
                       required
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      placeholder="Enter your message here..."
+                      placeholder="Masukkan pesan Anda di sini..."
                     ></textarea>
                   </div>
 
@@ -163,7 +163,7 @@ export default function Contact() {
                     className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition font-medium flex items-center justify-center"
                   >
                     <Send className="mr-2" size={18} />
-                    Send Message
+                    Kirim Pesan
                   </button>
                 </form>
               </div>
@@ -175,33 +175,33 @@ export default function Contact() {
               <div className="bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg h-64 flex items-center justify-center">
                 <div className="text-center">
                   <MapPin className="mx-auto mb-2 text-blue-600" size={48} />
-                  <h3 className="text-xl font-semibold text-blue-800">Interactive Map</h3>
-                  <p className="text-blue-600">Find us at our main location</p>
+                  <h3 className="text-xl font-semibold text-blue-800">Peta Interaktif</h3>
+                  <p className="text-blue-600">Temukan kami di lokasi utama kami</p>
                 </div>
               </div>
 
               {/* Additional Contact Info */}
               <div className="bg-blue-50 p-6 rounded-lg">
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Quick Contact</h3>
+                <h3 className="text-xl font-bold text-gray-900 mb-4">Kontak Cepat</h3>
                 <div className="space-y-4">
                   <div className="flex items-center space-x-3">
                     <Phone className="text-blue-600" size={20} />
                     <div>
-                      <p className="font-semibold">Emergency Hotline</p>
+                      <p className="font-semibold">Hotline Darurat</p>
                       <p className="text-gray-600">(237) 681-812-255</p>
                     </div>
                   </div>
                   <div className="flex items-center space-x-3">
                     <Mail className="text-blue-600" size={20} />
                     <div>
-                      <p className="font-semibold">General Inquiries</p>
+                      <p className="font-semibold">Pertanyaan Umum</p>
                       <p className="text-gray-600">filidule@gmail.com</p>
                     </div>
                   </div>
                   <div className="flex items-center space-x-3">
                     <Clock className="text-blue-600" size={20} />
                     <div>
-                      <p className="font-semibold">Working Hours</p>
+                      <p className="font-semibold">Jam Kerja</p>
                       <p className="text-gray-600">Mon-Sun: 09:00 - 20:00</p>
                     </div>
                   </div>
@@ -210,7 +210,7 @@ export default function Contact() {
 
               {/* Social Media */}
               <div className="bg-white p-6 rounded-lg shadow-md">
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Follow Us</h3>
+                <h3 className="text-xl font-bold text-gray-900 mb-4">Ikuti Kami</h3>
                 <div className="flex space-x-4">
                   <a href="#" className="bg-blue-600 text-white p-3 rounded-full hover:bg-blue-700 transition">
                     <Facebook size={20} />
@@ -226,7 +226,8 @@ export default function Contact() {
                   </a>
                 </div>
                 <p className="text-gray-600 mt-4">
-                  Stay connected with us for health tips, news, and updates about our services.
+                  Tetap terhubung dengan kami untuk mendapatkan tips kesehatan, berita, dan 
+                  informasi terbaru tentang layanan kami.
                 </p>
               </div>
             </div>
@@ -239,25 +240,25 @@ export default function Contact() {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
-              Frequently Asked Questions
+              Pertanyaan yang Sering Diajukan
             </h2>
             <div className="space-y-6">
               {[
                 {
-                  question: "How do I schedule an appointment?",
-                  answer: "You can schedule an appointment by calling our hotline, using our online booking system, or visiting our hospital directly."
+                  question: "Bagaimana cara menjadwalkan janji temu?",
+                  answer: "Anda dapat menjadwalkan janji temu dengan menelepon hotline kami, menggunakan sistem pemesanan online kami, atau mengunjungi rumah sakit kami secara langsung."
                 },
                 {
-                  question: "What should I bring to my appointment?",
-                  answer: "Please bring a valid ID, insurance card (if applicable), list of current medications, and any relevant medical records."
+                  question: "Apa saja yang harus saya bawa pada saat janji temu?",
+                  answer: "Harap bawa kartu identitas yang masih berlaku, kartu asuransi (jika ada), daftar obat yang sedang Anda konsumsi, dan rekam medis yang relevan."
                 },
                 {
-                  question: "Do you accept insurance?",
-                  answer: "Yes, we accept most major insurance plans. Please contact us to verify if your specific plan is accepted."
+                  question: "Apakah Anda menerima asuransi?",
+                  answer: "Ya, kami menerima sebagian besar rencana asuransi utama. Silakan hubungi kami untuk memverifikasi apakah rencana spesifik Anda diterima."
                 },
                 {
-                  question: "What are your emergency procedures?",
-                  answer: "For emergencies, call our emergency hotline immediately or visit our emergency department which is open 24/7."
+                  question: "Apa saja prosedur darurat Anda?",
+                  answer: "Untuk keadaan darurat, segera hubungi hotline darurat kami atau kunjungi departemen gawat darurat kami yang buka 24/7."
                 }
               ].map((faq, index) => (
                 <div key={index} className="bg-white p-6 rounded-lg shadow-md">

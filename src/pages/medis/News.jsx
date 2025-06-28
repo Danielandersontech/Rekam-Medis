@@ -4,8 +4,8 @@ import { useState } from "react";
 const newsArticles = [
   {
     id: 1,
-    title: "A daily shot of brandy could help you live over 100 years",
-    excerpt: "Recent studies suggest that moderate alcohol consumption may have surprising health benefits for longevity.",
+    title: "Segelas brendi setiap hari dapat membantu Anda hidup lebih dari 100 tahun",
+    excerpt: "Studi terbaru menunjukkan bahwa konsumsi alkohol dalam jumlah sedang dapat memberikan manfaat kesehatan yang mengejutkan bagi umur panjang.",
     date: "21 Nov 21",
     author: "Dr. Sarah Johnson",
     category: "Research",
@@ -14,8 +14,8 @@ const newsArticles = [
   },
   {
     id: 2,
-    title: "The seven dwarfs helped the princess be happy",
-    excerpt: "A metaphorical look at how community support systems contribute to mental health and well-being.",
+    title: "Tujuh kurcaci membantu sang putri menjadi bahagia",
+    excerpt: "Sebuah pandangan metaforis tentang bagaimana sistem dukungan komunitas berkontribusi terhadap kesehatan mental dan kesejahteraan.",
     date: "21 Nov 21",
     author: "Dr. Michael Chen",
     category: "Mental Health",
@@ -24,8 +24,8 @@ const newsArticles = [
   },
   {
     id: 3,
-    title: "Why did the chicken cross the road to better health?",
-    excerpt: "Exploring the importance of physical activity and outdoor exercise in maintaining cardiovascular health.",
+    title: "Mengapa ayam menyeberang jalan menuju kesehatan yang lebih baik?",
+    excerpt: "Menjelajahi pentingnya aktivitas fisik dan olahraga di luar ruangan dalam menjaga kesehatan jantung.",
     date: "20 Nov 21",
     author: "Dr. Emily Rodriguez",
     category: "Cardiology",
@@ -34,8 +34,8 @@ const newsArticles = [
   },
   {
     id: 4,
-    title: "There are multiple reasons people might want to read about health",
-    excerpt: "Understanding the growing trend of health literacy and its impact on patient outcomes and preventive care.",
+    title: "Ada beberapa alasan mengapa orang mungkin ingin membaca tentang kesehatan",
+    excerpt: "Memahami tren literasi kesehatan yang terus berkembang dan dampaknya terhadap hasil akhir pasien dan perawatan pencegahan.",
     date: "19 Nov 21",
     author: "Dr. Akila Tanjee",
     category: "Public Health",
@@ -44,8 +44,8 @@ const newsArticles = [
   },
   {
     id: 5,
-    title: "Breakthrough in Cancer Treatment Shows Promising Results",
-    excerpt: "New immunotherapy techniques are showing remarkable success rates in treating various forms of cancer.",
+    title: "Terobosan dalam Pengobatan Kanker Menunjukkan Hasil yang Menjanjikan",
+    excerpt: "Teknik imunoterapi baru menunjukkan tingkat keberhasilan yang luar biasa dalam mengobati berbagai jenis kanker.",
     date: "18 Nov 21",
     author: "Dr. David Wilson",
     category: "Oncology",
@@ -54,8 +54,8 @@ const newsArticles = [
   },
   {
     id: 6,
-    title: "The Future of Telemedicine in Post-Pandemic Healthcare",
-    excerpt: "How virtual consultations are reshaping patient care and making healthcare more accessible worldwide.",
+    title: "Masa Depan Telemedicine dalam Perawatan Kesehatan Pasca-Pandemi",
+    excerpt: "Bagaimana konsultasi virtual membentuk kembali perawatan pasien dan membuat perawatan kesehatan lebih mudah diakses di seluruh dunia.",
     date: "17 Nov 21",
     author: "Dr. Lisa Park",
     category: "Technology",
@@ -86,10 +86,10 @@ export default function News() {
       <section className="bg-blue-900 text-white py-16">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl lg:text-5xl font-bold mb-4">
-            Medical News & Updates
+            Berita & Pembaruan Medis
           </h1>
           <p className="text-xl text-blue-200 max-w-2xl mx-auto">
-            Stay informed with the latest medical research, health tips, and healthcare innovations
+           Tetap terinformasi dengan penelitian medis terbaru, tips kesehatan, dan inovasi perawatan kesehatan
           </p>
         </div>
       </section>
@@ -111,7 +111,7 @@ export default function News() {
                   <div className="md:w-1/2 p-8">
                     <div className="flex items-center space-x-4 mb-4">
                       <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
-                        Featured
+                        Unggulan
                       </span>
                       <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">
                         {featuredArticle.category}
@@ -135,7 +135,7 @@ export default function News() {
                         </div>
                       </div>
                       <button className="flex items-center space-x-2 text-blue-600 hover:text-blue-700 font-medium">
-                        <span>Read More</span>
+                        <span>Baca Lebih Lanjut</span>
                         <ArrowRight size={16} />
                       </button>
                     </div>
@@ -188,16 +188,16 @@ export default function News() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              BETTER INFORMATION, BETTER HEALTH
+              INFORMASI YANG LEBIH BAIK, KESEHATAN YANG LEBIH BAIK
             </h2>
             <p className="text-xl text-gray-600">
-              Latest News & Articles
+              Berita & Artikel Terbaru
             </p>
           </div>
           
           {filteredArticles.length === 0 ? (
             <div className="text-center py-12">
-              <p className="text-gray-500 text-lg">No articles found matching your criteria.</p>
+              <p className="text-gray-500 text-lg">Tidak ditemukan artikel yang sesuai dengan kriteria Anda.</p>
             </div>
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -246,7 +246,7 @@ export default function News() {
           {/* Load More Button */}
           <div className="text-center mt-12">
             <button className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition font-medium">
-              Load More Articles
+              Muat Lebih Banyak Artikel
             </button>
           </div>
         </div>
@@ -260,7 +260,7 @@ export default function News() {
               Stay Updated with Health News
             </h2>
             <p className="text-xl text-gray-600 mb-8">
-              Subscribe to our newsletter and get the latest health news, tips, and medical updates delivered to your inbox.
+              Berlangganan buletin kami dan dapatkan berita kesehatan terbaru, kiat, dan pembaruan medis yang dikirimkan ke kotak masuk Anda.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
               <input
@@ -269,11 +269,11 @@ export default function News() {
                 className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
               <button className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition font-medium">
-                Subscribe
+                Berlangganan
               </button>
             </div>
             <p className="text-sm text-gray-500 mt-4">
-              We respect your privacy. Unsubscribe at any time.
+              Kami menghormati privasi Anda. Berhenti berlangganan kapan saja.
             </p>
           </div>
         </div>
