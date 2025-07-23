@@ -1,32 +1,32 @@
 import { Heart, Shield, Award, Users, Activity, Clock } from "lucide-react";
 
 const stats = [
-  { number: "1000+", label: "Happy Patients", icon: Users },
-  { number: "50+", label: "Expert Doctors", icon: Award },
-  { number: "15+", label: "Years Experience", icon: Clock },
-  { number: "100%", label: "Success Rate", icon: Activity }
+  { number: "1000+", label: "Pasien yang bahagia", icon: Users },
+  { number: "50+", label: "Dokter Ahli", icon: Award },
+  { number: "15+", label: "Pengalaman bertahun-tahun", icon: Clock },
+  { number: "100%", label: "Tingkat Keberhasilan", icon: Activity }
 ];
 
 const values = [
   {
     icon: Heart,
-    title: "Compassionate Care",
-    description: "We treat every patient with empathy, respect, and personalized attention to ensure comfort and healing."
+    title: "Perawatan Penuh Kasih",
+    description: "Kami memperlakukan setiap pasien dengan empati, rasa hormat, dan perhatian yang dipersonalisasi untuk memastikan kenyamanan dan penyembuhan."
   },
   {
     icon: Shield,
-    title: "Quality & Safety",
-    description: "Our commitment to the highest medical standards ensures safe, effective, and reliable healthcare services."
+    title: "Kualitas & Keselamatan",
+    description: "Komitmen kami terhadap standar medis tertinggi memastikan layanan perawatan kesehatan yang aman, efektif, dan andal."
   },
   {
     icon: Award,
-    title: "Excellence",
-    description: "We continuously strive for excellence in medical care, technology, and patient satisfaction."
+    title: "Keunggulan",
+    description: "Kami terus berupaya untuk menjadi yang terbaik dalam perawatan medis, teknologi, dan kepuasan pasien."
   },
   {
     icon: Activity,
-    title: "Innovation",
-    description: "We embrace cutting-edge medical technology and innovative treatments to provide the best outcomes."
+    title: "Inovasi",
+    description: "Kami menggunakan teknologi medis mutakhir dan perawatan inovatif untuk memberikan hasil terbaik."
   }
 ];
 
@@ -34,13 +34,14 @@ export default function Tentang() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="bg-blue-900 text-white py-16">
+      <section className=" text-blue-800 py-16" 
+       style={{ backgroundImage: 'url("https://manicauniversity.com/images/pictures/School_of_Medicine.png")' }}>
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl lg:text-5xl font-bold mb-4">
-            About MEDDICAL
+            Tentang MEDDICAL
           </h1>
-          <p className="text-xl text-blue-200 max-w-2xl mx-auto">
-            Leading the Way in Medical Excellence with over 15 years of dedicated service to our community
+          <p className="text-xl text-blue-900 max-w-2xl mx-auto">
+            Memimpin dalam Keunggulan Medis dengan lebih dari 15 tahun pelayanan yang berdedikasi kepada komunitas kami
           </p>
         </div>
       </section>
@@ -75,15 +76,15 @@ export default function Tentang() {
             </div>
             <div className="space-y-8">
               <div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">Our Mission</h2>
+                <h2 className="text-3xl font-bold text-gray-900 mb-4">Misi Kami</h2>
                 <p className="text-gray-600 leading-relaxed">
-                  To provide exceptional healthcare services through innovation, compassion, and excellence in medical practice. We are committed to improving the health and well-being of our community by delivering personalized, high-quality medical care that exceeds expectations.
+                  Memberikan layanan kesehatan yang luar biasa melalui inovasi, kasih sayang, dan keunggulan dalam praktik medis. Kami berkomitmen untuk meningkatkan kesehatan dan kesejahteraan komunitas kami dengan memberikan perawatan medis berkualitas tinggi yang dipersonalisasi yang melebihi harapan.
                 </p>
               </div>
               <div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-4">Our Vision</h2>
+                <h2 className="text-3xl font-bold text-gray-900 mb-4">Visi Kami</h2>
                 <p className="text-gray-600 leading-relaxed">
-                  To be the leading healthcare provider recognized for outstanding patient care, advanced treatments, and medical breakthroughs. We envision a healthier future where every patient receives world-class medical care in a compassionate and supportive environment.
+                  Menjadi penyedia layanan kesehatan terkemuka yang diakui untuk perawatan pasien yang luar biasa, perawatan canggih, dan terobosan medis. Kami membayangkan masa depan yang lebih sehat di mana setiap pasien menerima perawatan medis kelas dunia dalam lingkungan yang penuh kasih dan mendukung.
                 </p>
               </div>
             </div>
@@ -95,9 +96,9 @@ export default function Tentang() {
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Our Core Values</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Nilai-Nilai Dasar Kami</h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              These principles guide everything we do and shape our commitment to exceptional healthcare
+              Prinsip-prinsip ini memandu semua yang kami lakukan dan membentuk komitmen kami terhadap perawatan kesehatan yang luar biasa
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -119,9 +120,9 @@ export default function Tentang() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Our Story</h2>
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">Cerita Kami</h2>
               <p className="text-xl text-gray-600">
-                A journey of dedication, growth, and unwavering commitment to healthcare excellence
+                Sebuah perjalanan penuh dedikasi, pertumbuhan, dan komitmen yang tak tergoyahkan terhadap keunggulan layanan kesehatan
               </p>
             </div>
             <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -134,13 +135,13 @@ export default function Tentang() {
               </div>
               <div className="space-y-6">
                 <p className="text-gray-600 leading-relaxed">
-                  Founded in 2008, MEDDICAL began as a small clinic with a big vision: to provide world-class healthcare services to our community. What started with a team of 5 dedicated professionals has grown into a comprehensive medical facility serving thousands of patients annually.
+                  Didirikan pada tahun 2008, MEDDICAL dimulai sebagai sebuah klinik kecil dengan visi besar: untuk menyediakan layanan kesehatan kelas dunia bagi masyarakat. Apa yang dimulai dengan tim yang terdiri dari 5 profesional yang berdedikasi telah berkembang menjadi fasilitas medis yang komprehensif yang melayani ribuan pasien setiap tahunnya.
                 </p>
                 <p className="text-gray-600 leading-relaxed">
-                  Over the years, we have expanded our services, adopted cutting-edge medical technology, and built a team of highly qualified specialists. Our commitment to continuous improvement and patient-centered care has made us a trusted name in healthcare.
+                  Selama bertahun-tahun, kami telah memperluas layanan kami, mengadopsi teknologi medis mutakhir, dan membangun tim spesialis yang berkualifikasi tinggi. Komitmen kami terhadap peningkatan berkelanjutan dan perawatan yang berpusat pada pasien telah menjadikan kami sebagai nama tepercaya dalam bidang perawatan kesehatan.
                 </p>
                 <p className="text-gray-600 leading-relaxed">
-                  Today, we continue to grow and evolve, always staying true to our founding principles of compassion, excellence, and innovation in medical care.
+                  Saat ini, kami terus tumbuh dan berkembang, selalu setia pada prinsip-prinsip pendirian kami, yaitu kasih sayang, keunggulan, dan inovasi dalam perawatan medis.
                 </p>
               </div>
             </div>
@@ -152,9 +153,9 @@ export default function Tentang() {
       <section className="py-16 bg-blue-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Leadership Team</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Tim Kepemimpinan</h2>
             <p className="text-xl text-gray-600">
-              Meet the experienced professionals leading our mission
+              Temui para profesional berpengalaman yang memimpin misi kami
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">

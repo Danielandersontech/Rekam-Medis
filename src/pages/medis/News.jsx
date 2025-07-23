@@ -83,12 +83,13 @@ export default function News() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="bg-blue-900 text-white py-16">
+      <section className="text-blue-800 py-16 "
+      style={{ backgroundImage: 'url("https://cdn.vanguardngr.com/wp-content/uploads/2022/05/nurses-1.jpg")' }}>
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl lg:text-5xl font-bold mb-4">
             Berita & Pembaruan Medis
           </h1>
-          <p className="text-xl text-blue-200 max-w-2xl mx-auto">
+          <p className="text-xl text-blue-900 max-w-2xl mx-auto">
            Tetap terinformasi dengan penelitian medis terbaru, tips kesehatan, dan inovasi perawatan kesehatan
           </p>
         </div>

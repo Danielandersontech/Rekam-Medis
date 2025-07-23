@@ -35,12 +35,13 @@ export default function Contact() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <section className="bg-blue-900 text-white py-16">
+      <section className="text-blue-900 py-16 "
+      style={{ backgroundImage: 'url("https://www.emblemhealth.com/content/dam/emblemhealth/images/providers/newsletter/GettyImages-1189304034_web.jpg")' }}>
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl lg:text-5xl font-bold mb-4">
             Hubungi kami
           </h1>
-          <p className="text-xl text-blue-200">
+          <p className="text-xl text-blue-800">
             Kami siap membantu dan menjawab pertanyaan apa pun yang mungkin Anda miliki
           </p>
         </div>

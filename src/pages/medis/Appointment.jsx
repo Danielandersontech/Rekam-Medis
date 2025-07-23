@@ -22,13 +22,14 @@ export default function Appointment() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <section className="bg-blue-900 text-white py-16">
+      <section className=" text-blue-900 py-16"
+       style={{ backgroundImage: 'url("https://manicauniversity.com/images/pictures/School_of_Medicine.png")' }}>
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl lg:text-5xl font-bold mb-4">
-            Book an Appointment
+            Buat Janji Temu
           </h1>
-          <p className="text-xl text-blue-200">
-            Schedule your visit with our expert medical professionals
+          <p className="text-xl text-blue-800">
+            Jadwalkan kunjungan Anda dengan para profesional medis ahli kami
           </p>
         </div>
       </section>
@@ -41,9 +42,9 @@ export default function Appointment() {
               <div className="bg-blue-600 text-white p-6">
                 <h2 className="text-2xl font-bold flex items-center">
                   <Calendar className="mr-3" />
-                  Schedule Your Appointment
+                  Jadwalkan Janji Temu Anda
                 </h2>
-                <p className="text-blue-100 mt-2">Fill out the form below to book your appointment</p>
+                <p className="text-blue-100 mt-2">Isi formulir di bawah ini untuk membuat janji temu Anda</p>
               </div>
               
               <form className="p-8 space-y-6">
@@ -52,27 +53,27 @@ export default function Appointment() {
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       <User className="inline w-4 h-4 mr-1" />
-                      Full Name *
+                      Nama Lengkap *
                     </label>
                     <input 
                       type="text" 
                       required
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      placeholder="Enter your full name"
+                      placeholder="Masukkan nama lengkap anda"
                     />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Gender *
+                      Jenis Kelamin *
                     </label>
                     <select 
                       required
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     >
-                      <option value="">Select Gender</option>
-                      <option value="male">Male</option>
-                      <option value="female">Female</option>
-                      <option value="other">Other</option>
+                      <option value="">Pilih Jenis Kelamin</option>
+                      <option value="male">Laki-laki</option>
+                      <option value="female">Perempuan</option>
+                      <option value="other">Lainnya</option>
                     </select>
                   </div>
                 </div>
@@ -81,25 +82,25 @@ export default function Appointment() {
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       <Mail className="inline w-4 h-4 mr-1" />
-                      Email Address *
+                      Alamat email *
                     </label>
                     <input 
                       type="email" 
                       required
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      placeholder="Enter your email"
+                      placeholder="Masukkan email Anda"
                     />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       <Phone className="inline w-4 h-4 mr-1" />
-                      Phone Number *
+                      Nomor Telepon *
                     </label>
                     <input 
                       type="tel" 
                       required
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      placeholder="Enter your phone number"
+                      placeholder="Masukkan Nomor Telepon Anda"
                     />
                   </div>
                 </div>
@@ -109,7 +110,7 @@ export default function Appointment() {
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       <Calendar className="inline w-4 h-4 mr-1" />
-                      Preferred Date *
+                      Tanggal Pilihan *
                     </label>
                     <input 
                       type="date" 
@@ -121,13 +122,13 @@ export default function Appointment() {
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       <Clock className="inline w-4 h-4 mr-1" />
-                      Preferred Time *
+                      Waktu Pilihan*
                     </label>
                     <select 
                       required
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     >
-                      <option value="">Select Time</option>
+                      <option value="">Pilih Waktu</option>
                       {timeSlots.map((time, index) => (
                         <option key={index} value={time}>{time}</option>
                       ))}
@@ -138,13 +139,13 @@ export default function Appointment() {
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Department *
+                     Departemen *
                     </label>
                     <select 
                       required
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     >
-                      <option value="">Choose Department</option>
+                      <option value="">Pilih Departemen</option>
                       {departments.map((dept) => (
                         <option key={dept.id} value={dept.name}>{dept.name}</option>
                       ))}
@@ -152,10 +153,10 @@ export default function Appointment() {
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Preferred Doctor
+                      Pilihan Dokter 
                     </label>
                     <select className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                      <option value="">Choose Doctor (Optional)</option>
+                      <option value="">Pilih Dokter (Optional)</option>
                       {doctors.map((doctor) => (
                         <option 
                           key={doctor.id} 
@@ -172,12 +173,12 @@ export default function Appointment() {
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     <MessageSquare className="inline w-4 h-4 mr-1" />
-                    Additional Message
+                    Pesan Tambahan
                   </label>
                   <textarea 
                     rows={4}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    placeholder="Please describe your symptoms or reason for visit (optional)"
+                    placeholder="Jelaskan gejala atau alasan kunjungan Anda (opsional)"
                   ></textarea>
                 </div>
 
@@ -189,7 +190,7 @@ export default function Appointment() {
                     className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                   />
                   <label htmlFor="terms" className="text-sm text-gray-600">
-                    I agree to the <a href="#" className="text-blue-600 hover:underline">Terms and Conditions</a> and <a href="#" className="text-blue-600 hover:underline">Privacy Policy</a>
+                    Saya menyetujui persyaratan <a href="#" className="text-blue-600 hover:underline">Syarat dan Ketentuan</a> dan <a href="#" className="text-blue-600 hover:underline">Kebijakan Privasi</a>
                   </label>
                 </div>
 
@@ -197,7 +198,7 @@ export default function Appointment() {
                   type="submit"
                   className="w-full bg-blue-600 text-white py-4 rounded-lg hover:bg-blue-700 transition font-medium text-lg"
                 >
-                  Book Appointment
+                  Pesan Janji Temu
                 </button>
               </form>
             </div>
@@ -209,16 +210,16 @@ export default function Appointment() {
       <section className="py-16 bg-red-50">
         <div className="container mx-auto px-4 text-center">
           <div className="max-w-2xl mx-auto">
-            <h2 className="text-3xl font-bold text-red-600 mb-4">Emergency?</h2>
+            <h2 className="text-3xl font-bold text-red-600 mb-4">Keadaan darurat?</h2>
             <p className="text-gray-700 mb-6">
-              If you have a medical emergency, please call our emergency line immediately or visit the nearest emergency room.
+              Jika Anda mengalami keadaan darurat medis, segera hubungi saluran darurat kami atau kunjungi ruang gawat darurat terdekat.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a 
                 href="tel:911" 
                 className="bg-red-600 text-white px-8 py-3 rounded-lg hover:bg-red-700 transition font-medium"
               >
-                Call Emergency: 911
+                Panggilan Darurat: 911
               </a>
               <a 
                 href="tel:(237) 681-812-255" 
