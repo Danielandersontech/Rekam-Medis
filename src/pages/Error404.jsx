@@ -7,7 +7,7 @@ export default function Error404() {
       style={{ overflow: 'hidden' }}
     >
       <div className="text-center max-w-sm px-4">
-        <h1 className="text-4xl font-bold text-blue-900 mb-2">Halaman tidak ditemukan</h1>
+        <h1 className="text-4xl font-bold text-blue-800 mb-2">Halaman tidak ditemukan</h1>
         <p className="text-sm text-blue-500 mb-4">
           Kamu tersesat. Tenang—kita bisa kembali ke tempat yang benar.
         </p>

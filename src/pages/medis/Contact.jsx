@@ -41,7 +41,7 @@ export default function Contact() {
           <h1 className="text-4xl lg:text-5xl font-bold mb-4">
             Hubungi kami
           </h1>
-          <p className="text-xl text-blue-900">
+          <p className="text-xl text-blue-800">
             Kami siap membantu dan menjawab pertanyaan apa pun yang mungkin Anda miliki
           </p>
         </div>

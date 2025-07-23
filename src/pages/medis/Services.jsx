@@ -73,7 +73,7 @@ export default function Services() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className=" text-blue-900 py-16 bg-cover bg-center bg-no-repeat"
+      <section className=" text-blue-800 py-16 bg-cover bg-center bg-no-repeat"
       style={{ backgroundImage: 'url("https://latinouseye.org/wp-content/uploads/2022/12/Rectangle-13-1.jpg")' }}>
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl lg:text-5xl font-bold mb-4">

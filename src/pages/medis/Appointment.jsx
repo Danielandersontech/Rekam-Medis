@@ -28,7 +28,7 @@ export default function Appointment() {
           <h1 className="text-4xl lg:text-5xl font-bold mb-4">
             Buat Janji Temu
           </h1>
-          <p className="text-xl text-blue-900">
+          <p className="text-xl text-blue-800">
             Jadwalkan kunjungan Anda dengan para profesional medis ahli kami
           </p>
         </div>

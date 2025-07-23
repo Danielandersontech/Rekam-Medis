@@ -83,7 +83,7 @@ export default function News() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="text-blue-900 py-16 "
+      <section className="text-blue-800 py-16 "
       style={{ backgroundImage: 'url("https://cdn.vanguardngr.com/wp-content/uploads/2022/05/nurses-1.jpg")' }}>
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl lg:text-5xl font-bold mb-4">
