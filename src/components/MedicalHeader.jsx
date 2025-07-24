@@ -11,14 +11,15 @@ export default function MedicalHeader() {
         {/* Top bar with contact info */}
         <div className="hidden md:flex justify-between items-center py-2 text-sm border-b border-blue-800">
           <div className="flex space-x-6">
-            <span>📞 EMERGENCY: (237) 681-812-255</span>
-            <span>⏰ WORK HOUR: 09:00 - 20:00 Everyday</span>
+            <span>📞 DARURAT: (0761) 123-456</span>
+            <span>⏰ JAM KERJA: 09:00 - 20:00 Setiap Hari</span>
           </div>
           <div className="flex space-x-4">
-            <span>📍 LOCATION: 0123 Some place</span>
+            <span>📍 LOKASI: Pekanbaru, Riau</span>
           </div>
         </div>
-        
+
+
         {/* Main navigation */}
         <div className="py-4 flex justify-between items-center">
           <div className="flex items-center">
@@ -26,17 +27,17 @@ export default function MedicalHeader() {
               MEDD<span className="text-blue-300">I</span>CAL
             </Link>
           </div>
-          
+
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex space-x-8">
-            <Link to="/" className="hover:text-blue-300 font-medium transition">Home</Link>
-            <Link to="/medis/tentang" className="hover:text-blue-300 font-medium transition">About Us</Link>
-            <Link to="/medis/services" className="hover:text-blue-300 font-medium transition">Services</Link>
-            <Link to="/medis/appoinment" className="hover:text-blue-300 font-medium transition">Doctors</Link>
-            <Link to="/medis/news" className="hover:text-blue-300 font-medium transition">News</Link>
-            <Link to="/medis/contact" className="hover:text-blue-300 font-medium transition">Contact</Link>
+            <Link to="/" className="hover:text-blue-300 font-medium transition">Beranda</Link>
+            <Link to="/medis/tentang" className="hover:text-blue-300 font-medium transition">Tentang Kami</Link>
+            <Link to="/medis/services" className="hover:text-blue-300 font-medium transition">Layanan</Link>
+            <Link to="/medis/appoinment" className="hover:text-blue-300 font-medium transition">Dokter</Link>
+            <Link to="/medis/news" className="hover:text-blue-300 font-medium transition">Berita</Link>
+            <Link to="/medis/contact" className="hover:text-blue-300 font-medium transition">Kontak</Link>
           </nav>
-          
+
           <div className="flex items-center space-x-4">
             <button className="p-2 hover:bg-blue-800 rounded-full transition">
               <Search size={20} />
@@ -45,9 +46,9 @@ export default function MedicalHeader() {
               <User size={18} />
               <span>Login</span>
             </Link>
-            
+
             {/* Mobile menu button */}
-            <button 
+            <button
               className="lg:hidden p-2 hover:bg-blue-800 rounded-full transition"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
@@ -55,7 +56,7 @@ export default function MedicalHeader() {
             </button>
           </div>
         </div>
-        
+
         {/* Mobile Navigation */}
         {isMenuOpen && (
           <nav className="lg:hidden py-4 border-t border-blue-800">
