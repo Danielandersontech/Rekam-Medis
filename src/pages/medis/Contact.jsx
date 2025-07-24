@@ -1,4 +1,5 @@
-import { Phone, Mail, MapPin, Clock, MessageSquare, Send, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, MessageSquare, Send, Facebook, Twitter, Instagram, Linkedin, ChevronDown } from "lucide-react";
+import { useState } from "react";
 
 const contactInfo = [
   {
@@ -32,33 +33,46 @@ const contactInfo = [
 ];
 
 export default function Contact() {
+  const [openFAQ, setOpenFAQ] = useState(null); 
+
+  const toggleFAQ = (index) => {
+    setOpenFAQ(openFAQ === index ? null : index);
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 font-sans text-gray-800"> 
       {/* Hero Section */}
-      <section className="text-blue-900 py-16 "
-      style={{ backgroundImage: 'url("https://www.emblemhealth.com/content/dam/emblemhealth/images/providers/newsletter/GettyImages-1189304034_web.jpg")' }}>
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl lg:text-5xl font-bold mb-4">
+      <section
+        className="relative py-28 lg:py-40 bg-cover bg-center bg-no-repeat overflow-hidden"
+        style={{ backgroundImage: 'url("https://www.emblemhealth.com/content/dam/emblemhealth/images/providers/newsletter/GettyImages-1189304034_web.jpg")' }}
+      >
+        <div className="absolute inset-0 bg-blue-900/70 backdrop-brightness-75 animate-fade-in-bg"></div> 
+        <div className="relative container mx-auto px-6 text-center z-10">
+          <h1 className="text-4xl lg:text-6xl font-extrabold text-white mb-6 leading-tight tracking-tight animate-slide-in-up">
             Hubungi kami
           </h1>
-          <p className="text-xl text-blue-800">
+          <p className="text-xl lg:text-2xl text-blue-100 max-w-3xl mx-auto opacity-95 animate-fade-in-slow tracking-wide">
             Kami siap membantu dan menjawab pertanyaan apa pun yang mungkin Anda miliki
           </p>
         </div>
       </section>
 
       {/* Contact Info Cards */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+      <section className="py-20 -mt-16 relative z-20"> 
+        <div className="container mx-auto px-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8"> 
             {contactInfo.map((info, index) => (
-              <div key={index} className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition text-center">
-                <div className={`w-16 h-16 ${info.color} rounded-full flex items-center justify-center mx-auto mb-4`}>
-                  <info.icon size={24} />
+              <div
+                key={index}
+                className="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 text-center transform hover:-translate-y-2 border border-gray-100 animate-fade-in-up"
+                style={{ animationDelay: `${0.1 * index}s` }} 
+              >
+                <div className={`w-20 h-20 ${info.color} rounded-full flex items-center justify-center mx-auto mb-6 shadow-md transition-transform duration-300 group-hover:scale-110`}> {/* Larger icon circle, shadow */}
+                  <info.icon size={30} className="transform group-hover:rotate-6 transition-transform duration-300" /> 
                 </div>
-                <h3 className="font-bold text-gray-800 mb-2">{info.title}</h3>
-                <p className="text-lg font-semibold text-gray-900 mb-1">{info.content}</p>
-                <p className="text-sm text-gray-600">{info.description}</p>
+                <h3 className="font-extrabold text-gray-900 mb-3 text-xl">{info.title}</h3> 
+                <p className="text-xl font-bold text-gray-900 mb-2">{info.content}</p> 
+                <p className="text-base text-gray-600">{info.description}</p> 
               </div>
             ))}
           </div>
@@ -66,77 +80,77 @@ export default function Contact() {
       </section>
 
       {/* Contact Form & Map */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12">
+      <section className="py-20 bg-gradient-to-br from-blue-50 to-indigo-50"> 
+        <div className="container mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-16"> 
             {/* Contact Form */}
-            <div>
-              <div className="bg-white p-8 rounded-lg shadow-lg">
-                <h2 className="text-3xl font-bold text-gray-900 mb-6 flex items-center">
-                  <MessageSquare className="mr-3 text-blue-600" />
+            <div className="animate-slide-in-from-left"> 
+              <div className="bg-white p-10 rounded-2xl shadow-2xl border border-gray-100"> 
+                <h2 className="text-3xl lg:text-4xl font-extrabold text-gray-900 mb-8 flex items-center"> 
+                  <MessageSquare className="mr-4 text-blue-600" size={30} /> 
                   Kirimkan pesan kepada kami
                 </h2>
-                <p className="text-gray-600 mb-8">
+                <p className="text-gray-700 mb-10 leading-relaxed text-lg"> 
                   Punya pertanyaan atau ingin membuat janji temu? Isi formulir di bawah ini dan kami akan menghubungi Anda sesegera mungkin.
                 </p>
-                
-                <form className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-6">
+
+                <form className="space-y-7"> 
+                  <div className="grid md:grid-cols-2 gap-7"> 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Nama Depan *
+                      <label className="block text-sm font-semibold text-gray-800 mb-2"> 
+                        Nama Depan <span className="text-red-500">*</span>
                       </label>
-                      <input 
-                        type="text" 
+                      <input
+                        type="text"
                         required
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-5 py-3 border border-gray-300 rounded-xl focus:ring-3 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 text-lg placeholder-gray-400" 
                         placeholder="Masukkan nama depan Anda"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Nama Belakang *
+                      <label className="block text-sm font-semibold text-gray-800 mb-2">
+                        Nama Belakang <span className="text-red-500">*</span>
                       </label>
-                      <input 
-                        type="text" 
+                      <input
+                        type="text"
                         required
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-5 py-3 border border-gray-300 rounded-xl focus:ring-3 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 text-lg placeholder-gray-400"
                         placeholder="Masukkan nama belakang Anda"
                       />
                     </div>
                   </div>
 
-                  <div className="grid md:grid-cols-2 gap-6">
+                  <div className="grid md:grid-cols-2 gap-7">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Alamat Email *
+                      <label className="block text-sm font-semibold text-gray-800 mb-2">
+                        Alamat Email <span className="text-red-500">*</span>
                       </label>
-                      <input 
-                        type="email" 
+                      <input
+                        type="email"
                         required
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-5 py-3 border border-gray-300 rounded-xl focus:ring-3 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 text-lg placeholder-gray-400"
                         placeholder="masukkan alamat email"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-semibold text-gray-800 mb-2">
                         Nomor Telepon
                       </label>
-                      <input 
-                        type="tel" 
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      <input
+                        type="tel"
+                        className="w-full px-5 py-3 border border-gray-300 rounded-xl focus:ring-3 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 text-lg placeholder-gray-400"
                         placeholder="Masukkan nomor telepon Anda"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Subjek *
+                    <label className="block text-sm font-semibold text-gray-800 mb-2">
+                      Subjek <span className="text-red-500">*</span>
                     </label>
-                    <select 
+                    <select
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-5 py-3 border border-gray-300 rounded-xl focus:ring-3 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 text-lg appearance-none bg-white pr-10" 
                     >
                       <option value="">Pilih subjek</option>
                       <option value="appointment">Pertanyaan Janji Temu</option>
@@ -148,86 +162,86 @@ export default function Contact() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Pesan *
+                    <label className="block text-sm font-semibold text-gray-800 mb-2">
+                      Pesan <span className="text-red-500">*</span>
                     </label>
-                    <textarea 
+                    <textarea
                       rows={6}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-5 py-3 border border-gray-300 rounded-xl focus:ring-3 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 text-lg placeholder-gray-400"
                       placeholder="Masukkan pesan Anda di sini..."
                     ></textarea>
                   </div>
 
-                  <button 
+                  <button
                     type="submit"
-                    className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition font-medium flex items-center justify-center"
+                    className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-4 rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 font-bold text-lg shadow-lg hover:shadow-xl flex items-center justify-center transform hover:-translate-y-1 animate-pulse-light" // Gradient button, stronger shadow, transform on hover, pulse animation
                   >
-                    <Send className="mr-2" size={18} />
+                    <Send className="mr-3" size={20} /> 
                     Kirim Pesan
                   </button>
                 </form>
               </div>
             </div>
 
-            {/* Map & Additional Info */}
-            <div className="space-y-8">
+            
+            <div className="space-y-10 animate-slide-in-from-right"> 
               {/* Map Placeholder */}
-              <div className="bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg h-64 flex items-center justify-center">
+              <div className="bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl h-80 flex items-center justify-center shadow-lg border border-blue-200"> 
                 <div className="text-center">
-                  <MapPin className="mx-auto mb-2 text-blue-600" size={48} />
-                  <h3 className="text-xl font-semibold text-blue-800">Peta Interaktif</h3>
-                  <p className="text-blue-600">Temukan kami di lokasi utama kami</p>
+                  <MapPin className="mx-auto mb-3 text-blue-600" size={56} /> 
+                  <h3 className="text-2xl font-extrabold text-blue-800 mb-2">Peta Interaktif</h3> 
+                  <p className="text-blue-700 text-lg">Temukan kami di lokasi utama kami</p> 
                 </div>
               </div>
 
               {/* Additional Contact Info */}
-              <div className="bg-blue-50 p-6 rounded-lg">
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Kontak Cepat</h3>
-                <div className="space-y-4">
-                  <div className="flex items-center space-x-3">
-                    <Phone className="text-blue-600" size={20} />
+              <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100"> 
+                <h3 className="text-2xl font-extrabold text-gray-900 mb-6">Kontak Cepat</h3> 
+                <div className="space-y-6"> 
+                  <div className="flex items-start space-x-4"> 
+                    <Phone className="text-blue-600 flex-shrink-0 mt-1" size={24} /> 
                     <div>
-                      <p className="font-semibold">Hotline Darurat</p>
-                      <p className="text-gray-600">(237) 681-812-255</p>
+                      <p className="font-bold text-lg">Hotline Darurat</p> 
+                      <p className="text-gray-700 text-base">(237) 681-812-255</p>
                     </div>
                   </div>
-                  <div className="flex items-center space-x-3">
-                    <Mail className="text-blue-600" size={20} />
+                  <div className="flex items-start space-x-4">
+                    <Mail className="text-blue-600 flex-shrink-0 mt-1" size={24} />
                     <div>
-                      <p className="font-semibold">Pertanyaan Umum</p>
-                      <p className="text-gray-600">filidule@gmail.com</p>
+                      <p className="font-bold text-lg">Pertanyaan Umum</p>
+                      <p className="text-gray-700 text-base">filidule@gmail.com</p>
                     </div>
                   </div>
-                  <div className="flex items-center space-x-3">
-                    <Clock className="text-blue-600" size={20} />
+                  <div className="flex items-start space-x-4">
+                    <Clock className="text-blue-600 flex-shrink-0 mt-1" size={24} />
                     <div>
-                      <p className="font-semibold">Jam Kerja</p>
-                      <p className="text-gray-600">Mon-Sun: 09:00 - 20:00</p>
+                      <p className="font-bold text-lg">Jam Kerja</p>
+                      <p className="text-gray-700 text-base">Mon-Sun: 09:00 - 20:00</p>
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* Social Media */}
-              <div className="bg-white p-6 rounded-lg shadow-md">
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Ikuti Kami</h3>
-                <div className="flex space-x-4">
-                  <a href="#" className="bg-blue-600 text-white p-3 rounded-full hover:bg-blue-700 transition">
-                    <Facebook size={20} />
+              <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100"> 
+                <h3 className="text-2xl font-extrabold text-gray-900 mb-6">Ikuti Kami</h3> 
+                <div className="flex space-x-5 mb-6"> 
+                  <a href="https://www.facebook.com/" className="bg-blue-600 text-white p-4 rounded-full hover:bg-blue-700 transition-all duration-300 transform hover:scale-110 shadow-md"> 
+                    <Facebook size={22} />
                   </a>
-                  <a href="#" className="bg-blue-400 text-white p-3 rounded-full hover:bg-blue-500 transition">
-                    <Twitter size={20} />
+                  <a href="https://x.com/" className="bg-blue-400 text-white p-4 rounded-full hover:bg-blue-500 transition-all duration-300 transform hover:scale-110 shadow-md">
+                    <Twitter size={22} />
                   </a>
-                  <a href="#" className="bg-purple-600 text-white p-3 rounded-full hover:bg-purple-700 transition">
-                    <Instagram size={20} />
+                  <a href="https://www.instagram.com/" className="bg-purple-600 text-white p-4 rounded-full hover:bg-purple-700 transition-all duration-300 transform hover:scale-110 shadow-md">
+                    <Instagram size={22} />
                   </a>
-                  <a href="#" className="bg-blue-800 text-white p-3 rounded-full hover:bg-blue-900 transition">
-                    <Linkedin size={20} />
+                  <a href="https://www.linkedin.com/" className="bg-blue-800 text-white p-4 rounded-full hover:bg-blue-900 transition-all duration-300 transform hover:scale-110 shadow-md">
+                    <Linkedin size={22} />
                   </a>
                 </div>
-                <p className="text-gray-600 mt-4">
-                  Tetap terhubung dengan kami untuk mendapatkan tips kesehatan, berita, dan 
+                <p className="text-gray-700 text-base leading-relaxed"> 
+                  Tetap terhubung dengan kami untuk mendapatkan tips kesehatan, berita, dan
                   informasi terbaru tentang layanan kami.
                 </p>
               </div>
@@ -237,10 +251,10 @@ export default function Contact() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto"> 
+            <h2 className="text-3xl lg:text-4xl font-extrabold text-center text-gray-900 mb-14">
               Pertanyaan yang Sering Diajukan
             </h2>
             <div className="space-y-6">
@@ -262,9 +276,23 @@ export default function Contact() {
                   answer: "Untuk keadaan darurat, segera hubungi hotline darurat kami atau kunjungi departemen gawat darurat kami yang buka 24/7."
                 }
               ].map((faq, index) => (
-                <div key={index} className="bg-white p-6 rounded-lg shadow-md">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">{faq.question}</h3>
-                  <p className="text-gray-600">{faq.answer}</p>
+                <div key={index} className="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden"> 
+                  <button
+                    className="flex justify-between items-center w-full p-6 text-left font-semibold text-gray-900 text-lg focus:outline-none transition-colors duration-200 hover:bg-gray-50"
+                    onClick={() => toggleFAQ(index)}
+                  >
+                    {faq.question}
+                    <ChevronDown
+                      size={20}
+                      className={`transition-transform duration-300 ${openFAQ === index ? 'rotate-180' : ''}`}
+                    />
+                  </button>
+                  <div
+                    className={`transition-all duration-300 ease-in-out overflow-hidden ${openFAQ === index ? 'max-h-96 opacity-100 p-6 pt-0' : 'max-h-0 opacity-0 p-0' 
+                      }`}
+                  >
+                    <p className="text-gray-700 text-base leading-relaxed">{faq.answer}</p>
+                  </div>
                 </div>
               ))}
             </div>
