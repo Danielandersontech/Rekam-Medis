@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
-import { ImSpinner2 } from "react-icons/im";
+import { ImSpinner2 } from "react-icons/im"; 
+import { LogIn, BriefcaseMedical } from 'lucide-react'; 
 
 export default function Login() {
     const navigate = useNavigate();
@@ -26,101 +27,143 @@ export default function Login() {
         setError("");
 
         try {
-            const response = await axios.post("https://dummyjson.com/user/login", {
-                username: dataForm.email,
+            // Menggunakan dummyjson.com/auth/login untuk body yang lebih sesuai
+            const response = await axios.post("https://dummyjson.com/auth/login", {
+                username: dataForm.email, // dummyjson pakai 'username' bukan 'email'
                 password: dataForm.password,
+            }, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             });
 
-            if (response.status === 200) {
-                navigate("/admin");
+            if (response.status === 200 && response.data.token) {
+                // Simpan token atau data user jika diperlukan
+                localStorage.setItem('userToken', response.data.token);
+                console.log("Login successful:", response.data);
+                navigate("/admin"); // Arahkan ke halaman admin
+            } else {
+                setError("Login failed: Unexpected response from server.");
             }
         } catch (err) {
-            setError(err.response?.data?.message || "Invalid credentials");
+            console.error("Login error:", err);
+            // Periksa apakah ada response dan data
+            if (err.response && err.response.data && err.response.data.message) {
+                setError(err.response.data.message);
+            } else if (err.message) {
+                setError("Login failed: " + err.message);
+            } else {
+                setError("Login failed: An unknown error occurred.");
+            }
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-blue-100 p-4">
-            <div className="card w-full max-w-md bg-white shadow-xl rounded-lg overflow-hidden">
-                <div className="bg-blue-600 py-4 px-6">
-                    <div className="flex items-center justify-center gap-3">
-                        <div className="bg-white p-2 rounded-full">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                            </svg>
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 p-4 sm:p-6 lg:p-8">
+            <div className="bg-white shadow-2xl rounded-xl overflow-hidden max-w-xl md:max-w-3xl lg:max-w-4xl w-full transform transition-all duration-500 hover:scale-[1.01] animate-fade-in-down">
+                
+                {/* Header Card */}
+                <div className="bg-gradient-to-r from-blue-600 to-indigo-700 py-6 px-8 text-white">
+                    <div className="flex flex-col items-center justify-center gap-3">
+                        <div className="bg-white p-3 rounded-full shadow-md">
+                            <BriefcaseMedical size={40} className="text-blue-600" /> {/* Ikon logo yang sama dengan Register */}
                         </div>
-                        <h1 className="text-2xl font-bold text-white">Tex Medical</h1>
+                        <h1 className="text-3xl font-extrabold tracking-tight">Tex Medical</h1>
+                        <p className="text-blue-100 text-base opacity-90">Hospital Management System</p>
                     </div>
-                    <p className="text-blue-100 text-center mt-2">Hospital Management System</p>
                 </div>
 
-                <div className="card-body p-6">
-                    <h2 className="text-xl font-semibold text-center text-gray-700">Staff Login</h2>
+                {/* Body Card - Form Login */}
+                <div className="p-8 md:p-10 lg:p-12">
+                    <h2 className="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-6 flex items-center justify-center gap-2">
+                        <LogIn size={24} className="text-blue-500" /> Staff Login
+                    </h2>
                     
                     {error && (
-                        <div className="alert alert-error mt-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                            <span>{error}</span>
+                        <div role="alert" className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative mb-6">
+                            <strong className="font-bold">Error! </strong>
+                            <span className="block sm:inline">{error}</span>
                         </div>
                     )}
 
-                    <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+                    <form onSubmit={handleSubmit} className="mt-6 space-y-5 w-full">
                         <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">Email Address</span>
+                            <label className="block text-gray-700 text-sm md:text-base font-medium mb-1" htmlFor="email">
+                                Email Address
                             </label>
                             <input
-                                type="email"
+                                type="text" // Mengubah type menjadi text karena dummyjson.com/auth/login menggunakan 'username'
                                 name="email"
+                                id="email"
                                 value={dataForm.email}
                                 onChange={handleChange}
-                                className="input input-bordered bg-gray-50"
-                                placeholder="your@email.com"
+                                className="w-full px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 ease-in-out bg-gray-50 text-gray-800 text-base"
+                                placeholder="your@email.com" // Contoh placeholder untuk dummyjson
                                 required
                             />
                         </div>
 
                         <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">Password</span>
+                            <label className="block text-gray-700 text-sm md:text-base font-medium mb-1" htmlFor="password">
+                                Password
                             </label>
                             <input
                                 type="password"
                                 name="password"
+                                id="password"
                                 value={dataForm.password}
                                 onChange={handleChange}
-                                className="input input-bordered bg-gray-50"
-                                placeholder="••••••••"
+                                className="w-full px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 ease-in-out bg-gray-50 text-gray-800 text-base"
+                                placeholder="••••••••" // Contoh placeholder untuk dummyjson
                                 required
                             />
                         </div>
 
-                        <div className="form-control mt-8">
+                        <div className="form-control pt-4">
                             <button 
                                 type="submit" 
-                                className="btn btn-primary btn-block"
+                                className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white px-6 py-3.5 rounded-lg text-lg md:text-xl font-semibold shadow-lg transition-all duration-300 ease-in-out transform hover:-translate-y-1 focus:outline-none focus:ring-4 focus:ring-blue-300"
                                 disabled={loading}
                             >
                                 {loading ? (
                                     <>
-                                        <ImSpinner2 className="animate-spin mr-2" />
+                                        <ImSpinner2 className="animate-spin mr-2" size={22} />
                                         Authenticating...
                                     </>
-                                ) : 'Login'}
+                                ) : (
+                                    <>
+                                        <LogIn size={22} /> Login
+                                    </>
+                                )}
                             </button>
                         </div>
                     </form>
 
-                    <div className="flex justify-between mt-6 text-sm">
-                        <Link to="/forgot" className="text-blue-600 hover:underline">Forgot Password?</Link>
-                        <Link to="/register" className="text-blue-600 hover:underline">Create Account</Link>
+                    <div className="flex flex-col sm:flex-row justify-between items-center mt-8 text-base md:text-lg gap-4"> {/* Menyesuaikan layout dan spacing */}
+                        <Link to="/forgot" className="text-blue-600 hover:text-blue-800 font-semibold hover:underline transition duration-200">Forgot Password?</Link>
+                        <Link to="/register" className="text-blue-600 hover:text-blue-800 font-semibold hover:underline transition duration-200">Create Account</Link>
                     </div>
                 </div>
             </div>
+
+            {/* Animasi (sama seperti halaman register) */}
+            <style>{`
+                @keyframes fade-in-down {
+                    from {
+                        opacity: 0;
+                        transform: translateY(-15px);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
+                .animate-fade-in-down {
+                    animation: fade-in-down 0.6s ease-out forwards;
+                }
+            `}</style>
         </div>
     );
 }
