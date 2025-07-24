@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ImSpinner2 } from 'react-icons/im';
 import { userAPI } from '../../services/userAPI';
+import { BriefcaseMedical } from 'lucide-react';
 
 export default function Forgot() {
     const [loading, setLoading] = useState(false);
@@ -192,18 +193,18 @@ export default function Forgot() {
     );
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-blue-100 p-4">
-            <div className="card w-full max-w-md bg-white shadow-xl rounded-lg overflow-hidden">
-                <div className="bg-blue-600 py-4 px-6">
-                    <div className="flex items-center justify-center gap-3">
-                        <div className="bg-white p-2 rounded-full">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                            </svg>
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 p-4 sm:p-6 lg:p-8">
+            <div className="bg-white shadow-2xl rounded-xl overflow-hidden max-w-xl md:max-w-3xl lg:max-w-4xl w-full transform transition-all duration-500 hover:scale-[1.01] animate-fade-in-down">
+                
+                {/* Header Card */}
+                <div className="bg-gradient-to-r from-blue-600 to-indigo-700 py-6 px-8 text-white">
+                    <div className="flex flex-col items-center justify-center gap-3">
+                        <div className="bg-white p-3 rounded-full shadow-md">
+                            <BriefcaseMedical size={40} className="text-blue-600" />
                         </div>
-                        <h1 className="text-2xl font-bold text-white">Tex Medical</h1>
+                        <h1 className="text-3xl font-extrabold tracking-tight">Tex Medical</h1>
+                        <p className="text-blue-100 text-base opacity-90">Hospital Management System</p>
                     </div>
-                    <p className="text-blue-100 text-center mt-2">Hospital Management System</p>
                 </div>
 
                 <div className="card-body p-6">
@@ -236,6 +237,22 @@ export default function Forgot() {
                     )}
                 </div>
             </div>
+
+            <style>{`
+                @keyframes fade-in-down {
+                    from {
+                        opacity: 0;
+                        transform: translateY(-15px);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
+                .animate-fade-in-down {
+                    animation: fade-in-down 0.6s ease-out forwards;
+                }
+            `}</style>
         </div>
     );
 }
