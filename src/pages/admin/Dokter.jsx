@@ -1,424 +1,486 @@
-import React, { useState } from 'react';
-import { Award, Clock } from 'lucide-react';
-import { useForm } from '../../components/admin/useForm';
-import { useModal } from '../../components/admin/useModal';
-import PageHeader from '../../components/admin/PageHeader';
-import SearchBar from '../../components/admin/SearchBar';
-import FormModal from '../../components/admin/FormModal';
-import ActionDropdown from '../../components/admin/ActionDropdown';
-import StatusBadge from '../../components/admin/StatusBadge';
+import React, { useState, useEffect } from "react";
+import { Award, Clock } from "lucide-react";
+import { useForm } from "../../components/admin/useForm";
+import { useModal } from "../../components/admin/useModal";
+import PageHeader from "../../components/admin/PageHeader";
+import SearchBar from "../../components/admin/SearchBar";
+import FormModal from "../../components/admin/FormModal";
+import FormInput from "../../components/admin/FormInput";
+import FormSection from "../../components/admin/FormSection";
+import ActionDropdown from "../../components/admin/ActionDropdown";
+import StatusBadge from "../../components/admin/StatusBadge";
+import { dokterAPI } from "../../services/dokterAPI";
+import AlertBox from "../../components/AlertBox";
+import LoadingSpinner from "../../components/LoadingSpinner";
+import EmptyState from "../../components/EmptyState";
 
 export default function DokterPage() {
-    const [searchTerm, setSearchTerm] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
-    const [isEdit, setIsEdit] = useState(false);
-    const [editId, setEditId] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
+  const [editId, setEditId] = useState(null);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [dokterData, setDokterData] = useState([]);
+  const [poliOptions, setPoliOptions] = useState([]);
+  const [validationErrors, setValidationErrors] = useState({});
 
-    const initialFormData = {
-        nama: '',
-        nip: '',
-        spesialisasi: '',
-        no_lisensi: '',
-        telepon: '',
-        email: '',
-        alamat: '',
-        tanggal_lahir: '',
-        jenis_kelamin: '',
-        pendidikan: '',
-        pengalaman: '',
-        jam_praktek: '',
-        tarif_konsultasi: '',
-    };
+  const initialFormData = {
+    nama: "",
+    nip: "",
+    id_poli: "",
+    no_lisensi: "",
+    telepon: "",
+    email: "",
+    alamat: "",
+    tanggal_lahir: "",
+    jenis_kelamin: "",
+    pendidikan: "",
+    pengalaman: "",
+    jam_praktek: "",
+    tarif_konsultasi: "",
+    // status: 'Aktif', // Uncomment if status column is added
+  };
 
-    const { formData, handleInputChange, resetForm, setFormData } = useForm(initialFormData);
-    const { showModal, openModal, closeModal } = useModal();
+  const { formData, handleInputChange, resetForm, setFormData } =
+    useForm(initialFormData);
+  const { showModal, openModal, closeModal } = useModal();
 
-    const [dokterData, setDokterData] = useState([
-        {
-            id: 1,
-            nama: 'Dr. Ahmad Fadli, Sp.PD',
-            nip: 'DOK001',
-            spesialisasi: 'Penyakit Dalam',
-            no_lisensi: 'STR-12345678',
-            telepon: '08123456789',
-            email: 'ahmad.fadli@medicare.com',
-            pengalaman: '15 tahun',
-            status: 'Aktif',
-            jam_praktek: '08:00-16:00',
-            tarif: 'Rp 200.000',
-        },
-        {
-            id: 2,
-            nama: 'Dr. Maya Sari, Sp.A',
-            nip: 'DOK002',
-            spesialisasi: 'Anak',
-            no_lisensi: 'STR-12345679',
-            telepon: '08123456790',
-            email: 'maya.sari@medicare.com',
-            pengalaman: '12 tahun',
-            status: 'Aktif',
-            jam_praktek: '09:00-17:00',
-            tarif: 'Rp 250.000',
-        },
-        {
-            id: 3,
-            nama: 'Dr. Reza Pratama, Sp.OG',
-            nip: 'DOK003',
-            spesialisasi: 'Obstetri & Ginekologi',
-            no_lisensi: 'STR-12345680',
-            telepon: '08123456791',
-            email: 'reza.pratama@medicare.com',
-            pengalaman: '10 tahun',
-            status: 'Aktif',
-            jam_praktek: '10:00-18:00',
-            tarif: 'Rp 300.000',
-        },
-    ]);
+  useEffect(() => {
+    loadDokter();
+    loadPoli();
+  }, []);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+  const loadDokter = async () => {
+    try {
+      setIsLoading(true);
+      setError("");
+      const data = await dokterAPI.fetchDokter();
+      setDokterData(data);
+    } catch (err) {
+      setError("Gagal memuat data dokter: " + err.message);
+      console.error(err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const loadPoli = async () => {
+    try {
+      const data = await dokterAPI.fetchPoli();
+      setPoliOptions(data);
+    } catch (err) {
+      setError("Gagal memuat data poli: " + err.message);
+      console.error(err);
+    }
+  };
+
+  const validateForm = async () => {
+    const errors = {};
+
+    // Required fields
+    if (!formData.nama) errors.nama = "Nama lengkap wajib diisi";
+    if (!formData.nip) errors.nip = "NIP wajib diisi";
+    if (!formData.id_poli) errors.id_poli = "Poli wajib dipilih";
+    if (!formData.no_lisensi) errors.no_lisensi = "No. Lisensi wajib diisi";
+    if (!formData.telepon) errors.telepon = "Telepon wajib diisi";
+    if (!formData.email) errors.email = "Email wajib diisi";
+    if (!formData.tanggal_lahir)
+      errors.tanggal_lahir = "Tanggal lahir wajib diisi";
+    if (!formData.jenis_kelamin)
+      errors.jenis_kelamin = "Jenis kelamin wajib diisi";
+    if (!formData.jam_praktek) errors.jam_praktek = "Jam praktek wajib diisi";
+    if (!formData.tarif_konsultasi)
+      errors.tarif_konsultasi = "Tarif konsultasi wajib diisi";
+
+    // Format validations
+    if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      errors.email = "Format email tidak valid";
+    }
+    if (
+      formData.telepon &&
+      !/^\+?\d{10,13}$/.test(formData.telepon.replace(/\s/g, ""))
+    ) {
+      errors.telepon = "Format telepon tidak valid (10-13 digit)";
+    }
+    if (
+      formData.tarif_konsultasi &&
+      isNaN(formData.tarif_konsultasi) ||
+      Number(formData.tarif_konsultasi) <= 0
+    ) {
+      errors.tarif_konsultasi = "Tarif konsultasi harus angka positif";
+    }
+    if (
+      formData.tanggal_lahir &&
+      !/^\d{4}-\d{2}-\d{2}$/.test(formData.tanggal_lahir)
+    ) {
+      errors.tanggal_lahir = "Format tanggal lahir tidak valid (YYYY-MM-DD)";
+    }
+
+    // Validate id_poli exists
+    if (formData.id_poli) {
+      const poliExists = poliOptions.some(
+        (poli) => poli.id === parseInt(formData.id_poli)
+      );
+      if (!poliExists) errors.id_poli = "Poli tidak valid";
+    }
+
+    // Unique constraint checks
+    try {
+      const [nipExists, emailExists, lisensiExists] = await Promise.all([
+        dokterAPI.checkUniqueNip(formData.nip, isEdit ? editId : null),
+        dokterAPI.checkUniqueEmail(formData.email, isEdit ? editId : null),
+        dokterAPI.checkUniqueLisensi(formData.no_lisensi, isEdit ? editId : null),
+      ]);
+
+      if (nipExists) errors.nip = "NIP sudah terdaftar";
+      if (emailExists) errors.email = "Email sudah terdaftar";
+      if (lisensiExists) errors.no_lisensi = "No. Lisensi sudah terdaftar";
+    } catch (err) {
+      errors.api = "Gagal memeriksa data unik: " + err.message;
+    }
+
+    setValidationErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const isValid = await validateForm();
+    if (!isValid) return;
+
+    setIsLoading(true);
+    setError("");
+    setSuccess("");
+
+    try {
+      if (isEdit && editId) {
+        await dokterAPI.updateDokter(editId, formData);
+        setSuccess("Data dokter berhasil diperbarui!");
+      } else {
+        await dokterAPI.createDokter(formData);
+        setSuccess("Data dokter berhasil ditambahkan!");
+      }
+
+      resetForm();
+      setIsEdit(false);
+      setEditId(null);
+      setValidationErrors({});
+      closeModal();
+      loadDokter();
+
+      setTimeout(() => setSuccess(""), 3000);
+    } catch (error) {
+      setError("Error menyimpan data dokter: " + error.message);
+      console.error("Error saving doctor:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleEdit = (dokter) => {
+    setFormData({
+      ...dokter,
+      tanggal_lahir: dokter.tanggal_lahir.split("T")[0],
+      id_poli: dokter.id_poli,
+    });
+    setIsEdit(true);
+    setEditId(dokter.id);
+    setValidationErrors({});
+    openModal();
+  };
+
+  const handleDelete = async (id) => {
+    if (confirm("Yakin ingin menghapus data dokter ini?")) {
+      try {
         setIsLoading(true);
+        setError("");
+        setSuccess("");
 
-        try {
-            if (isEdit && editId) {
-                setDokterData(prev => prev.map(dokter =>
-                    dokter.id === editId
-                        ? {
-                            ...dokter,
-                            ...formData,
-                            id: editId,
-                            tarif: `Rp ${formData.tarif_konsultasi ? Number(formData.tarif_konsultasi).toLocaleString('id-ID') : '0'}`
-                        }
-                        : dokter
-                ));
-            } else {
-                const newDokter = {
-                    ...formData,
-                    id: Date.now(),
-                    status: 'Aktif',
-                    tarif: `Rp ${formData.tarif_konsultasi ? Number(formData.tarif_konsultasi).toLocaleString('id-ID') : '0'}`
-                };
-                setDokterData(prev => [...prev, newDokter]);
-            }
+        await dokterAPI.deleteDokter(id);
+        setSuccess("Data dokter berhasil dihapus!");
+        loadDokter();
 
-            resetForm();
-            setIsEdit(false);
-            setEditId(null);
-            closeModal();
-        } catch (error) {
-            console.error('Error saving doctor:', error);
-        } finally {
-            setIsLoading(false);
+        setTimeout(() => setSuccess(""), 3000);
+      } catch (error) {
+        setError("Gagal menghapus data dokter: " + error.message);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+  };
+
+  const handleAddNew = () => {
+    resetForm();
+    setIsEdit(false);
+    setEditId(null);
+    setValidationErrors({});
+    openModal();
+  };
+
+  const filteredDokter = dokterData.filter(
+    (dokter) =>
+      dokter.nama.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (dokter.poli &&
+        dokter.poli.nama_poli.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      dokter.nip.includes(searchTerm)
+  );
+
+  return (
+    <div className="space-y-6">
+      <PageHeader
+        title="Data Dokter"
+        description="Kelola data dokter dan tenaga medis"
+        buttonText="Tambah Dokter"
+        onButtonClick={handleAddNew}
+      />
+
+      {error && <AlertBox type="error">{error}</AlertBox>}
+      {success && <AlertBox type="success">{success}</AlertBox>}
+
+      <SearchBar
+        searchTerm={searchTerm}
+        onSearchChange={setSearchTerm}
+        placeholder="Cari nama, NIP, atau poli..."
+        filters={
+          <select className="select select-bordered">
+            <option>Semua Poli</option>
+            {poliOptions.map((poli) => (
+              <option key={poli.id}>{poli.nama_poli}</option>
+            ))}
+          </select>
         }
-    };
+      />
 
-    const handleEdit = (dokter) => {
-        const editData = {
-            ...dokter,
-            tarif_konsultasi: dokter.tarif.replace(/[^\d]/g, '')
-        };
-        setFormData(editData);
-        setIsEdit(true);
-        setEditId(dokter.id);
-        openModal();
-    };
+      {isLoading && <LoadingSpinner text="Memuat data dokter..." />}
 
-    const handleDelete = async (id) => {
-        if (confirm('Yakin ingin menghapus data dokter ini?')) {
-            setDokterData(prev => prev.filter(dokter => dokter.id !== id));
-        }
-    };
+      {!isLoading && dokterData.length === 0 && !error && (
+        <EmptyState text="Belum ada data dokter. Tambah dokter pertama!" />
+      )}
 
-    const handleAddNew = () => {
-        resetForm();
-        setIsEdit(false);
-        setEditId(null);
-        openModal();
-    };
+      {!isLoading && dokterData.length === 0 && error && (
+        <EmptyState text="Terjadi kesalahan. Coba lagi nanti." />
+      )}
 
-    const filteredDokter = dokterData.filter(dokter =>
-        dokter.nama.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        dokter.spesialisasi.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        dokter.nip.includes(searchTerm)
-    );
-
-    return (
-        <div className="space-y-6">
-            <PageHeader
-                title="Data Dokter"
-                description="Kelola data dokter dan tenaga medis"
-                buttonText="Tambah Dokter"
-                onButtonClick={handleAddNew}
-            />
-
-            <SearchBar
-                searchTerm={searchTerm}
-                onSearchChange={setSearchTerm}
-                placeholder="Cari nama, NIP, atau spesialisasi..."
-                filters={
-                    <select className="select select-bordered">
-                        <option>Semua Spesialisasi</option>
-                        <option>Penyakit Dalam</option>
-                        <option>Anak</option>
-                        <option>Obstetri & Ginekologi</option>
-                        <option>Bedah</option>
-                        <option>Jantung</option>
-                    </select>
-                }
-            />
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredDokter.map((dokter) => (
-                    <div key={dokter.id} className="card bg-base-100 shadow-sm hover:shadow-md transition-shadow">
-                        <div className="card-body">
-                            <div className="flex items-start justify-between">
-                                <div className="flex-1">
-                                    <h3 className="card-title text-lg">{dokter.nama}</h3>
-                                    <div className="flex items-center gap-2 text-primary mt-1">
-                                        <Award className="h-4 w-4" />
-                                        <span className="text-sm font-medium">{dokter.spesialisasi}</span>
-                                    </div>
-                                </div>
-                                <ActionDropdown
-                                    onEdit={() => handleEdit(dokter)}
-                                    onDelete={() => handleDelete(dokter.id)}
-                                />
-                            </div>
-
-                            <div className="space-y-2 mt-4">
-                                <div className="flex items-center gap-2 text-sm">
-                                    <span className="font-medium">NIP:</span>
-                                    <span className="font-mono">{dokter.nip}</span>
-                                </div>
-                                <div className="flex items-center gap-2 text-sm">
-                                    <span className="font-medium">Lisensi:</span>
-                                    <span className="font-mono text-xs">{dokter.no_lisensi}</span>
-                                </div>
-                                <div className="flex items-center gap-2 text-sm">
-                                    <Clock className="h-4 w-4" />
-                                    <span>{dokter.jam_praktek}</span>
-                                </div>
-                                <div className="flex items-center gap-2 text-sm">
-                                    <span className="font-medium">Pengalaman:</span>
-                                    <span>{dokter.pengalaman}</span>
-                                </div>
-                            </div>
-
-                            <div className="card-actions justify-between mt-4">
-                                <StatusBadge status={dokter.status} />
-                                <div className="text-right">
-                                    <div className="text-sm text-base-content/70">Tarif Konsultasi</div>
-                                    <div className="font-bold text-primary">{dokter.tarif}</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                ))}
-            </div>
-
-            <FormModal
-                isOpen={showModal}
-                onClose={closeModal}
-                title={isEdit ? "Edit Data Dokter" : "Tambah Dokter Baru"}
-                onSubmit={handleSubmit}
-                isLoading={isLoading}
-                submitText={isEdit ? "Update Data" : "Simpan Data"}
+      {!isLoading && dokterData.length > 0 && (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredDokter.map((dokter) => (
+            <div
+              key={dokter.id}
+              className="card bg-base-100 shadow-sm hover:shadow-md transition-shadow"
             >
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="form-control">
-                        <label className="label">
-                            <span className="label-text">Nama Lengkap *</span>
-                        </label>
-                        <input
-                            type="text"
-                            name="nama"
-                            value={formData.nama}
-                            onChange={handleInputChange}
-                            className="input input-bordered"
-                            required
-                        />
+              <div className="card-body">
+                <div className="flex items-start justify-between">
+                  <div className="flex-1">
+                    <h3 className="card-title text-lg">{dokter.nama}</h3>
+                    <div className="flex items-center gap-2 text-primary mt-1">
+                      <Award className="h-4 w-4" />
+                      <span className="text-sm font-medium">
+                        {dokter.poli ? dokter.poli.nama_poli : "Belum ada poli"}
+                      </span>
                     </div>
-
-                    <div className="form-control">
-                        <label className="label">
-                            <span className="label-text">NIP *</span>
-                        </label>
-                        <input
-                            type="text"
-                            name="nip"
-                            value={formData.nip}
-                            onChange={handleInputChange}
-                            className="input input-bordered"
-                            required
-                        />
-                    </div>
-
-                    <div className="form-control">
-                        <label className="label">
-                            <span className="label-text">Spesialisasi *</span>
-                        </label>
-                        <select
-                            name="spesialisasi"
-                            value={formData.spesialisasi}
-                            onChange={handleInputChange}
-                            className="select select-bordered"
-                            required
-                        >
-                            <option value="">Pilih Spesialisasi</option>
-                            <option value="Umum">Dokter Umum</option>
-                            <option value="Penyakit Dalam">Penyakit Dalam</option>
-                            <option value="Anak">Anak</option>
-                            <option value="Obstetri & Ginekologi">Obstetri & Ginekologi</option>
-                            <option value="Bedah">Bedah</option>
-                            <option value="Jantung">Jantung</option>
-                            <option value="Mata">Mata</option>
-                            <option value="THT">THT</option>
-                            <option value="Kulit">Kulit</option>
-                            <option value="Saraf">Saraf</option>
-                        </select>
-                    </div>
-
-                    <div className="form-control">
-                        <label className="label">
-                            <span className="label-text">No. Lisensi (STR) *</span>
-                        </label>
-                        <input
-                            type="text"
-                            name="no_lisensi"
-                            value={formData.no_lisensi}
-                            onChange={handleInputChange}
-                            className="input input-bordered"
-                            required
-                        />
-                    </div>
-
-                    <div className="form-control">
-                        <label className="label">
-                            <span className="label-text">Telepon *</span>
-                        </label>
-                        <input
-                            type="tel"
-                            name="telepon"
-                            value={formData.telepon}
-                            onChange={handleInputChange}
-                            className="input input-bordered"
-                            required
-                        />
-                    </div>
-
-                    <div className="form-control">
-                        <label className="label">
-                            <span className="label-text">Email *</span>
-                        </label>
-                        <input
-                            type="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleInputChange}
-                            className="input input-bordered"
-                            required
-                        />
-                    </div>
-
-                    <div className="form-control">
-                        <label className="label">
-                            <span className="label-text">Tanggal Lahir</span>
-                        </label>
-                        <input
-                            type="date"
-                            name="tanggal_lahir"
-                            value={formData.tanggal_lahir}
-                            onChange={handleInputChange}
-                            className="input input-bordered"
-                        />
-                    </div>
-
-                    <div className="form-control">
-                        <label className="label">
-                            <span className="label-text">Jenis Kelamin</span>
-                        </label>
-                        <select
-                            name="jenis_kelamin"
-                            value={formData.jenis_kelamin}
-                            onChange={handleInputChange}
-                            className="select select-bordered"
-                        >
-                            <option value="">Pilih Jenis Kelamin</option>
-                            <option value="Laki-laki">Laki-laki</option>
-                            <option value="Perempuan">Perempuan</option>
-                        </select>
-                    </div>
-
-                    <div className="form-control">
-                        <label className="label">
-                            <span className="label-text">Pendidikan Terakhir</span>
-                        </label>
-                        <input
-                            type="text"
-                            name="pendidikan"
-                            value={formData.pendidikan}
-                            onChange={handleInputChange}
-                            className="input input-bordered"
-                            placeholder="S1 Kedokteran, Sp. dll"
-                        />
-                    </div>
-
-                    <div className="form-control">
-                        <label className="label">
-                            <span className="label-text">Pengalaman (tahun)</span>
-                        </label>
-                        <input
-                            type="number"
-                            name="pengalaman"
-                            value={formData.pengalaman}
-                            onChange={handleInputChange}
-                            className="input input-bordered"
-                            min="0"
-                        />
-                    </div>
-
-                    <div className="form-control">
-                        <label className="label">
-                            <span className="label-text">Jam Praktek</span>
-                        </label>
-                        <input
-                            type="text"
-                            name="jam_praktek"
-                            value={formData.jam_praktek}
-                            onChange={handleInputChange}
-                            className="input input-bordered"
-                            placeholder="08:00-16:00"
-                        />
-                    </div>
-
-                    <div className="form-control">
-                        <label className="label">
-                            <span className="label-text">Tarif Konsultasi</span>
-                        </label>
-                        <input
-                            type="number"
-                            name="tarif_konsultasi"
-                            value={formData.tarif_konsultasi}
-                            onChange={handleInputChange}
-                            className="input input-bordered"
-                            placeholder="200000"
-                        />
-                    </div>
+                  </div>
+                  <ActionDropdown
+                    onEdit={() => handleEdit(dokter)}
+                    onDelete={() => handleDelete(dokter.id)}
+                  />
                 </div>
 
-                <div className="form-control">
-                    <label className="label">
-                        <span className="label-text">Alamat Lengkap</span>
-                    </label>
-                    <textarea
-                        name="alamat"
-                        value={formData.alamat}
-                        onChange={handleInputChange}
-                        className="textarea textarea-bordered"
-                        rows={3}
-                    ></textarea>
+                <div className="space-y-2 mt-4">
+                  <div className="flex items-center gap-2 text-sm">
+                    <span className="font-medium">NIP:</span>
+                    <span className="font-mono">{dokter.nip}</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm">
+                    <span className="font-medium">Lisensi:</span>
+                    <span className="font-mono text-xs">{dokter.no_lisensi}</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm">
+                    <Clock className="h-4 w-4" />
+                    <span>{dokter.jam_praktek}</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm">
+                    <span className="font-medium">Pengalaman:</span>
+                    <span>{dokter.pengalaman}</span>
+                  </div>
                 </div>
-            </FormModal>
+
+                <div className="card-actions justify-between mt-4">
+                  {/* <StatusBadge status={dokter.status} /> */}{" "}
+                  {/* Uncomment if status column is added */}
+                  <div className="text-right">
+                    <div className="text-sm text-base-content/70">
+                      Tarif Konsultasi
+                    </div>
+                    <div className="font-bold text-primary">
+                      Rp {Number(dokter.tarif_konsultasi).toLocaleString("id-ID")}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
-    );
+      )}
+
+      <FormModal
+        isOpen={showModal}
+        onClose={() => {
+          closeModal();
+          setValidationErrors({});
+        }}
+        title={isEdit ? "Edit Data Dokter" : "Tambah Dokter Baru"}
+        onSubmit={handleSubmit}
+        isLoading={isLoading}
+        submitText={isLoading ? "Mohon Tunggu..." : isEdit ? "Update Data" : "Simpan Data"}
+      >
+        <FormSection title="Informasi Pribadi">
+          <FormInput
+            label="Nama Lengkap"
+            name="nama"
+            value={formData.nama}
+            onChange={handleInputChange}
+            required
+            error={validationErrors.nama}
+          />
+
+          <FormInput
+            label="NIP"
+            name="nip"
+            value={formData.nip}
+            onChange={handleInputChange}
+            required
+            error={validationErrors.nip}
+          />
+        </FormSection>
+
+        <FormSection title="Informasi Profesional">
+          <FormInput
+            label="Poli"
+            name="id_poli"
+            type="select"
+            value={formData.id_poli}
+            onChange={handleInputChange}
+            required
+            error={validationErrors.id_poli}
+            options={[
+              { value: "", label: "Pilih Poli" },
+              ...poliOptions.map((poli) => ({
+                value: poli.id,
+                label: poli.nama_poli,
+              })),
+            ]}
+          />
+
+          <FormInput
+            label="No. Lisensi (STR)"
+            name="no_lisensi"
+            value={formData.no_lisensi}
+            onChange={handleInputChange}
+            required
+            error={validationErrors.no_lisensi}
+          />
+        </FormSection>
+
+        <FormSection title="Kontak dan Biodata">
+          <FormInput
+            label="Telepon"
+            name="telepon"
+            type="tel"
+            value={formData.telepon}
+            onChange={handleInputChange}
+            required
+            error={validationErrors.telepon}
+          />
+
+          <FormInput
+            label="Email"
+            name="email"
+            type="email"
+            value={formData.email}
+            onChange={handleInputChange}
+            required
+            error={validationErrors.email}
+          />
+
+          <FormInput
+            label="Tanggal Lahir"
+            name="tanggal_lahir"
+            type="date"
+            value={formData.tanggal_lahir}
+            onChange={handleInputChange}
+            required
+            error={validationErrors.tanggal_lahir}
+          />
+
+          <FormInput
+            label="Jenis Kelamin"
+            name="jenis_kelamin"
+            type="select"
+            value={formData.jenis_kelamin}
+            onChange={handleInputChange}
+            required
+            error={validationErrors.jenis_kelamin}
+            options={[
+              { value: "", label: "Pilih Jenis Kelamin" },
+              { value: "Laki-laki", label: "Laki-laki" },
+              { value: "Perempuan", label: "Perempuan" },
+            ]}
+          />
+        </FormSection>
+
+        <FormSection title="Informasi Karir">
+          <FormInput
+            label="Pendidikan Terakhir"
+            name="pendidikan"
+            value={formData.pendidikan}
+            onChange={handleInputChange}
+            placeholder="S1 Kedokteran, Sp. dll"
+          />
+
+          <FormInput
+            label="Pengalaman (tahun)"
+            name="pengalaman"
+            value={formData.pengalaman}
+            onChange={handleInputChange}
+            min="0"
+          />
+
+          <FormInput
+            label="Jam Praktek"
+            name="jam_praktek"
+            value={formData.jam_praktek}
+            onChange={handleInputChange}
+            required
+            error={validationErrors.jam_praktek}
+            placeholder="08:00-16:00"
+          />
+
+          <FormInput
+            label="Tarif Konsultasi"
+            name="tarif_konsultasi"
+            type="number"
+            value={formData.tarif_konsultasi}
+            onChange={handleInputChange}
+            required
+            error={validationErrors.tarif_konsultasi}
+            placeholder="200000"
+            min="0"
+          />
+        </FormSection>
+
+        <FormSection title="Alamat" columns={1}>
+          <FormInput
+            label="Alamat Lengkap"
+            name="alamat"
+            type="textarea"
+            value={formData.alamat}
+            onChange={handleInputChange}
+            rows={3}
+          />
+        </FormSection>
+      </FormModal>
+    </div>
+  );
 }

@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import axios from "axios";
 import { ImSpinner2 } from "react-icons/im";
+import { userAPI } from "../../services/userAPI";
 
 export default function Login() {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const [dataForm, setDataForm] = useState({
-        email: "",
+        username: "",
         password: "",
     });
 
@@ -26,16 +26,19 @@ export default function Login() {
         setError("");
 
         try {
-            const response = await axios.post("https://dummyjson.com/user/login", {
-                username: dataForm.email,
-                password: dataForm.password,
-            });
-
-            if (response.status === 200) {
+            const user = await userAPI.loginUser(dataForm.username, dataForm.password);
+            
+            // Store user data in localStorage for session management
+            localStorage.setItem('user', JSON.stringify(user));
+            
+            // Navigate based on user role
+            if (user.role === 'admin') {
                 navigate("/admin");
+            } else {
+                navigate("/dashboard");
             }
         } catch (err) {
-            setError(err.response?.data?.message || "Invalid credentials");
+            setError(err.message || "Login failed. Please try again.");
         } finally {
             setLoading(false);
         }
@@ -71,15 +74,15 @@ export default function Login() {
                     <form onSubmit={handleSubmit} className="mt-6 space-y-4">
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">Email Address</span>
+                                <span className="label-text">Username</span>
                             </label>
                             <input
-                                type="email"
-                                name="email"
-                                value={dataForm.email}
+                                type="text"
+                                name="username"
+                                value={dataForm.username}
                                 onChange={handleChange}
                                 className="input input-bordered bg-gray-50"
-                                placeholder="your@email.com"
+                                placeholder="Enter your username"
                                 required
                             />
                         </div>

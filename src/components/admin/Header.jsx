@@ -1,7 +1,31 @@
-import React from 'react';
-import { Search, Bell, BarChart3, Settings } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Search, Bell, BarChart3, Settings, User, LogOut } from 'lucide-react';
+import { authUtils } from '../../services/authUtils';
 
 export default function Header() {
+  const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    const user = authUtils.getCurrentUser();
+    setCurrentUser(user);
+  }, []);
+
+  const handleLogout = () => {
+    if (window.confirm('Apakah Anda yakin ingin keluar?')) {
+      authUtils.logout();
+    }
+  };
+
+  const getInitials = (name) => {
+    if (!name) return 'U';
+    return name
+      .split(' ')
+      .map(word => word.charAt(0))
+      .join('')
+      .toUpperCase()
+      .slice(0, 2);
+  };
+
   return (
     <div className="navbar bg-base-100 shadow-sm border-b border-base-300 px-4">
       <div className="navbar-start">
@@ -42,21 +66,49 @@ export default function Header() {
             <Settings className="h-5 w-5" />
           </button>
           
+          {/* User dropdown with name display */}
           <div className="dropdown dropdown-end">
-            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-              <div className="w-10 rounded-full">
-                <img alt="Profile" src="https://images.pexels.com/photos/5327585/pexels-photo-5327585.jpeg?auto=compress&cs=tinysrgb&w=400" />
+            <div tabIndex={0} role="button" className="btn btn-ghost rounded-btn flex items-center gap-2">
+              <div className="avatar">
+                <div className="w-8 rounded-full bg-primary text-primary-content flex items-center justify-center text-sm font-bold">
+                  {currentUser ? getInitials(currentUser.nama) : 'U'}
+                </div>
               </div>
+              <span className="hidden md:inline-block text-sm font-medium">
+                {currentUser ? currentUser.nama.split(' ')[0] : 'User'}
+              </span>
             </div>
             <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+              {currentUser && (
+                <li className="menu-title">
+                  <span>{currentUser.nama}</span>
+                </li>
+              )}
               <li>
                 <a className="justify-between">
-                  Profil
+                  <span className="flex items-center gap-2">
+                    <User className="h-4 w-4" />
+                    Profil
+                  </span>
                   <span className="badge">Baru</span>
                 </a>
               </li>
-              <li><a>Pengaturan</a></li>
-              <li><a>Keluar</a></li>
+              <li>
+                <a className="flex items-center gap-2">
+                  <Settings className="h-4 w-4" />
+                  Pengaturan
+                </a>
+              </li>
+              <div className="divider my-1"></div>
+              <li>
+                <button 
+                  onClick={handleLogout}
+                  className="flex items-center gap-2 text-error"
+                >
+                  <LogOut className="h-4 w-4" />
+                  Keluar
+                </button>
+              </li>
             </ul>
           </div>
         </div>
